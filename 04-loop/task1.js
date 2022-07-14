@@ -83,26 +83,41 @@
 // пользователь вводит число n 
 // написать цикл который выводит все числа от n до 0
 // (n может быть отрицательным)
-let n = 0;
-
+ let inputNumber;
+let isWork = false;
+let number = 0;
 do {
-    num = prompt("Введите НЕ отрицательное число ");
-    n = Number(num);
 
-    console.log(n);
+    inputNumber = prompt("Введите число.\n(число может быть отрицательным)");
 
+    if (inputNumber === null || inputNumber === '') {
+        console.log('Надо было вести число а не пустую строку.');
+    } else {
 
-    if(n < Number.MAX_SAFE_INTEGER ){
-    ;
-    }else{
-    console.log("Веденое число БОЛЬШОЕ введите еще раз");
+        number = Number(inputNumber);
+        if (isNaN(number)) {
+            console.log('Введено не число!\nНадо число.');
+        } else if (!Number.isSafeInteger(number)) {
+            console.log('Переданное значение НЕ является безопасным целым числом.');
+        } else {
+            isWork = true;
+        }
     }
 
-} while (n < 0 || isNaN(n));
+} while (isWork === false);
 
-for (let i = n; i > 0; i--) {
-    console.log(i);
+if (number > 0) {
+    for (let i = number; i > 0; i--) {
+        console.log(i);
+    }
+} else if (number < 0) {
+    for (let i = number; i < 0; i++) {
+        console.log(i);
+    }
+} else {
+    console.log('До нуля чисел нет.');
 }
+
 // написать прогамму, которая вычисляет сумму чисел от 1 до n 
 // (n всегда положительное) + проверить число n на число
 
@@ -113,5 +128,7 @@ for (let i = n; i > 0; i--) {
 // положительных: 2
 // отрицательных: 4
 // нулей: 1
+
+
 
 
