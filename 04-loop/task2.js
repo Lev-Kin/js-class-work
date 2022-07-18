@@ -68,31 +68,120 @@
 // Если пользователь пытается достать хомячков больше чем их осталось под 
 // диваном то вывести алертом сообщение "нет столько хомячков".
 
-let quantityHamster = 100;
-let count = 1;
-let inputNum = '';
-let numberСheck = 0;
+// let quantityHamster = 100;
+// let count = 1;
+// let inputNum = '';
+// let numberСheck = 0;
+// while (true) {
+
+//     inputNum = prompt('Сколько достать хомячков');
+
+//     if (inputNum === null) {
+//         break;
+//     }
+
+//     numberСheck = Number(inputNum);
+
+//     if (numberСheck > quantityHamster) {
+//         alert('Столько xомечков нету их меньше чем введеное число')
+//     } else if (numberСheck < quantityHamster) {
+//         alert('Хомечков больше чем введеное число')
+//         quantityHamster -= numberСheck;
+//     } else if (numberСheck === quantityHamster) {
+//         alert('Вы отгадали количество хомячков!!!\nХомячков под деваном -> ' + 100 +
+//             ' Потребовалось попыток ' + count);
+//         break;
+//     } else {
+//         alert('Ошибочный ввод!!!')
+//     }
+//     count++;
+// }
+
+
+// 4. Написать игру камень ножницы бумага
+// игра до 10 побед пользователя либо компа ( при победе выводим имя победителя )
+// пользователь должен вводить "камень" "ножницы" либо "бумага"
+// компьютер должен рандомно генерировать "камень" "ножницы" либо "бумага"
+// после чего выводим сообщение вида
+// "вы выиграли ваш выбор: камень, выбор компа: "ножницы""
+// и засчитываем очко соответствующему игроку, после чего начинаем следующий раунд
+// при ничьей, очко никому не засчитываем
+
+let countWinComp = 0;
+let countWinPlayer = 0;
+let inputPlayer = '';
+let inputComp = 0;
 while (true) {
 
-    inputNum = prompt('Сколько достать хомячков');
-
-    if (inputNum === null) {
+    if (countWinComp === 10 || countWinPlayer === 10) {
         break;
     }
 
-    numberСheck = Number(inputNum);
+    // 0 - камень; 1 - ножницы; 2 - бумага
+    inputComp = Math.floor(Math.random() * 3);
 
-    if (numberСheck > quantityHamster) {
-        alert('Столько xомечков нету их меньше чем введеное число')
-    } else if (numberСheck < quantityHamster) {
-        alert('Хомечков больше чем введеное число')
-        quantityHamster -= numberСheck;
-    } else if (numberСheck === quantityHamster) {
-        alert('Вы отгадали количество хомячков!!!\nХомячков под деваном -> ' + 100 +
-            ' Потребовалось попыток ' + count);
+    inputPlayer = prompt('Ввидете:\nкамень или ножницы или бумага');
+
+    if (inputPlayer === null) {
         break;
-    } else {
-        alert('Ошибочный ввод!!!')
     }
-    count++;
+
+    switch (inputComp) {
+        case 0:
+            inputComp = 'камень';
+            if (inputComp === inputPlayer) {
+                alert('Ничья');
+            } else if (inputPlayer === 'ножницы') {
+                alert(`вы проиграли ваш выбор: ${inputPlayer}, выбор компа: ${inputComp}`);
+                countWinComp++;
+            } else if (inputPlayer === 'бумага') {
+                alert(`вы выиграли ваш выбор: ${inputPlayer}, выбор компа: ${inputComp}`);
+                countWinPlayer++;
+            } else {
+                alert('ошибка');
+            }
+            break;
+
+        case 1:
+            inputComp = 'ножницы';
+            if (inputComp === inputPlayer) {
+                alert('Ничья')
+            } else if (inputPlayer === 'бумага') {
+                alert(`вы проиграли ваш выбор: ${inputPlayer}, выбор компа: ${inputComp}`);
+                countWinComp++;
+            } else if (inputPlayer === 'камень') {
+                alert(`вы выиграли ваш выбор: ${inputPlayer}, выбор компа: ${inputComp}`);
+                countWinPlayer++;
+            } else {
+                alert('ошибка');
+            }
+            break;
+
+        case 2:
+            inputComp = 'бумага';
+            if (inputComp === inputPlayer) {
+                alert('Ничья')
+            } else if (inputPlayer === 'камень') {
+                alert(`вы проиграли ваш выбор: ${inputPlayer}, выбор компа: ${inputComp}`);
+                countWinComp++;
+            } else if (inputPlayer === 'ножницы') {
+                alert(`вы выиграли ваш выбор: ${inputPlayer}, выбор компа: ${inputComp}`);
+                countWinPlayer++;
+            } else {
+                alert('ошибка');
+            }
+            break;
+
+        default:
+            alert('ошибка');
+            break;
+    }
+}
+
+if (countWinPlayer === 10) {
+    alert('ИГРОК выиграл.\nИгра окончена.');
+}
+
+if (countWinComp === 10) {
+    alert('КОМП выиграл.\nИгра окончена.');
 }
