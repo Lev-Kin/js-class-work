@@ -90,6 +90,7 @@
 //     }
 // }
 // console.log(arr);
+
 // 5. заполнить массив последовательными нечетными числами (длина 10)
 // let arr = new Array(10);
 // for (let i = 0; i < arr.length; i++) {
@@ -131,33 +132,89 @@
 // 9. дан массив из 10 случайных чисел (НЕ ПОСЛЕДОВАТЕЛЬНЫХ)
 // найдите количество элементов массива, которые отличны от наибольшего 
 // не больше чем на 10%
-let arr = new Array(10);
-let max = 0;
-for (let i = 0; i < arr.length; i++) {
-    arr[i] = Math.floor(Math.random() * 100);
-    if (arr[i] > max) {
-        max = arr[i];
-    }
-}
+// let arr = new Array(10);
+// let max = 0;
+// for (let i = 0; i < arr.length; i++) {
+//     arr[i] = Math.floor(Math.random() * 100);
+//     if (arr[i] > max) {
+//         max = arr[i];
+//     }
+// }
 
-let tenPercentOfMax = max / 100 * 10;
-let minimumFromMaximum = max - tenPercentOfMax;
+// let tenPercentOfMax = max / 100 * 10;
+// let minimumFromMaximum = max - tenPercentOfMax;
 
-console.log(arr);
-console.log(max);
-console.log(tenPercentOfMax);
+// console.log(arr);
+// console.log(max);
+// console.log(tenPercentOfMax);
 
-let count = 0;
-for (let i = 0; i < arr.length; i++) {
-    if (arr[i] > minimumFromMaximum && arr[i] !== max) {
-        count++;
-        console.log(arr[i]);
-    }
-}
-console.log(count);
+// let count = 0;
+// for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] > minimumFromMaximum && arr[i] !== max) {
+//         count++;
+//     }
+// }
+// console.log(count);
 
 // 10. дан массив из 10 случайных чисел (НЕ ПОСЛЕДОВАТЕЛЬНЫХ)
 // выведите на экран наибольший ЧЕТНЫЙ элемент массива
+
+// let arr = new Array(10);
+// let maxEvenElement = 0;
+
+// for (let i = 0; i < arr.length; i++) {
+//     arr[i] = Math.floor(Math.random() * 100);
+//     if (i % 2 === 0) {
+//         if (arr[i] > maxEvenElement) {
+//             maxEvenElement = arr[i]
+//         }
+//     }
+
+// }
+// console.log(arr);
+// console.log(maxEvenElement);
+
 // 11. дан массив из 10 случайных чисел (НЕ ПОСЛЕДОВАТЕЛЬНЫХ)
 // пользователь вводит число n, вывести в консоль элемент массива
 // который наиболее близок к n (если таких элементов несколько, вывести несколько)
+
+let inputUserNumber = +prompt('enter number');
+
+let arr = new Array(10);
+let min = Math.ceil(-100);
+let max = Math.floor(100);
+let minimumDistance = 0;
+let tempMinDistance = 0;
+for (let i = 0; i < arr.length; i++) {
+    // Максимум и минимум включаются
+    arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
+    
+    if (i === 0) {
+        minimumDistance = Math.abs(arr[0] - inputUserNumber);
+    } else {
+        if (Math.abs(arr[i] - inputUserNumber) <= minimumDistance) {
+            tempMinDistance = minimumDistance;
+            minimumDistance = Math.abs(arr[i] - inputUserNumber);
+
+            if (minimumDistance === 0) {
+                minimumDistance = tempMinDistance;
+            }
+        }
+    }
+}
+
+let result = [];
+for (let i = 0; i < arr.length; i++) {
+
+    if (arr[i] - minimumDistance === inputUserNumber) {
+        result.push(arr[i]);
+    }
+
+    if (arr[i] + minimumDistance === inputUserNumber) {
+        result.push(arr[i]);
+    }
+}
+
+console.log(minimumDistance);
+console.log(arr);
+console.log(result);
