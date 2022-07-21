@@ -164,7 +164,7 @@
 
 // for (let i = 0; i < arr.length; i++) {
 //     arr[i] = Math.floor(Math.random() * 100);
-//     if (i % 2 === 0) {
+//     if (arr[i] % 2 === 0) {
 //         if (arr[i] > maxEvenElement) {
 //             maxEvenElement = arr[i]
 //         }
@@ -178,43 +178,43 @@
 // пользователь вводит число n, вывести в консоль элемент массива
 // который наиболее близок к n (если таких элементов несколько, вывести несколько)
 
-let inputUserNumber = +prompt('enter number');
+// let inputUserNumber = +prompt('enter number');
 
-let arr = new Array(10);
-let min = Math.ceil(-100);
-let max = Math.floor(100);
-let minimumDistance = 0;
-let tempMinDistance = 0;
-for (let i = 0; i < arr.length; i++) {
-    // Максимум и минимум включаются
-    arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
+// let arr = new Array(10);
+// let min = Math.ceil(-100);
+// let max = Math.floor(100);
+// let minimumDistance = 0;
+// let tempMinDistance = 0;
+// for (let i = 0; i < arr.length; i++) {
+//     // Максимум и минимум включаются
+//     arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
     
-    if (i === 0) {
-        minimumDistance = Math.abs(arr[0] - inputUserNumber);
-    } else {
-        if (Math.abs(arr[i] - inputUserNumber) <= minimumDistance) {
-            tempMinDistance = minimumDistance;
-            minimumDistance = Math.abs(arr[i] - inputUserNumber);
+//     if (i === 0) {
+//         minimumDistance = Math.abs(arr[0] - inputUserNumber);
+//     } else {
+//         if (Math.abs(arr[i] - inputUserNumber) <= minimumDistance) {
+//             tempMinDistance = minimumDistance;
+//             minimumDistance = Math.abs(arr[i] - inputUserNumber);
 
-            if (minimumDistance === 0) {
-                minimumDistance = tempMinDistance;
-            }
-        }
-    }
-}
+//             if (minimumDistance === 0) {
+//                 minimumDistance = tempMinDistance;
+//             }
+//         }
+//     }
+// }
 
-let result = [];
-for (let i = 0; i < arr.length; i++) {
+// let result = [];
+// for (let i = 0; i < arr.length; i++) {
 
-    if (arr[i] - minimumDistance === inputUserNumber) {
-        result.push(arr[i]);
-    }
+//     if (arr[i] - minimumDistance === inputUserNumber) {
+//         result.push(arr[i]);
+//     }
 
-    if (arr[i] + minimumDistance === inputUserNumber) {
-        result.push(arr[i]);
-    }
-}
+//     if (arr[i] + minimumDistance === inputUserNumber) {
+//         result.push(arr[i]);
+//     }
+// }
 
-console.log(minimumDistance);
-console.log(arr);
-console.log(result);
+// console.log(minimumDistance);
+// console.log(arr);
+// console.log(result);
