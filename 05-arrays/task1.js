@@ -161,15 +161,20 @@
 
 // let arr = new Array(10);
 // let maxEvenElement = 0;
-
+// // let min = Math.ceil(-100);
+// // let max = Math.floor(100);
+// let isFirstEnty = true;
 // for (let i = 0; i < arr.length; i++) {
-//     arr[i] = Math.floor(Math.random() * 100);
+//     arr[i] = Math.floor(Math.random() * -100);
+//     //arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
 //     if (arr[i] % 2 === 0) {
-//         if (arr[i] > maxEvenElement) {
+//         if(isFirstEnty){
+//             maxEvenElement = arr[i];
+//             isFirstEnty = false;
+//         }else if (arr[i] > maxEvenElement) {
 //             maxEvenElement = arr[i]
 //         }
 //     }
-
 // }
 // console.log(arr);
 // console.log(maxEvenElement);

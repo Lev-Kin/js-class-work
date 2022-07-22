@@ -34,14 +34,16 @@
 // arr.sort();
 // const result  = arr2.slice(2);
 
-const arr2 = ['one', 'two', 'three', 'two', 'zzzzz', 'xxxxx', 'ccccc', 'vvvvvv'];
+//const arr2 = ['one', 'two', 'three', 'two', 'zzzzz', 'xxxxx', 'ccccc', 'vvvvvv'];
 
+//console.log(result);
 
-
-console.log(result);
-arr2.slice
-
-
-
+// // Number.MAX_SAFE_INTEGER - нечетное
+// let limNum = Number.MAX_SAFE_INTEGER;
+// if (limNum % 2 == 0) {
+//     console.log('Четное');
+// } else {
+//     console.log('Не четное');
+// }
 
 
