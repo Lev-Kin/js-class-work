@@ -161,12 +161,12 @@
 
 // let arr = new Array(10);
 // let maxEvenElement = 0;
-// // let min = Math.ceil(-100);
-// // let max = Math.floor(100);
+// let min = Math.ceil(-100);
+// let max = Math.floor(100);
 // let isFirstEnty = true;
 // for (let i = 0; i < arr.length; i++) {
-//     arr[i] = Math.floor(Math.random() * -100);
-//     //arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
+//     // arr[i] = Math.floor(Math.random() * 100);
+//      arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
 //     if (arr[i] % 2 === 0) {
 //         if(isFirstEnty){
 //             maxEvenElement = arr[i];
@@ -183,21 +183,24 @@
 // пользователь вводит число n, вывести в консоль элемент массива
 // который наиболее близок к n (если таких элементов несколько, вывести несколько)
 
-// let inputUserNumber = +prompt('enter number');
+//let inputUserNumber = +prompt('enter number');
 
 // let arr = new Array(10);
 // let min = Math.ceil(-100);
 // let max = Math.floor(100);
 // let minimumDistance = 0;
 // let tempMinDistance = 0;
+
+// let inputUserNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+// console.log(inputUserNumber);
 // for (let i = 0; i < arr.length; i++) {
 //     // Максимум и минимум включаются
 //     arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
-    
+
 //     if (i === 0) {
 //         minimumDistance = Math.abs(arr[0] - inputUserNumber);
 //     } else {
-//         if (Math.abs(arr[i] - inputUserNumber) <= minimumDistance) {
+//        if (Math.abs(arr[i] - inputUserNumber) <= minimumDistance) {
 //             tempMinDistance = minimumDistance;
 //             minimumDistance = Math.abs(arr[i] - inputUserNumber);
 
@@ -223,3 +226,72 @@
 // console.log(minimumDistance);
 // console.log(arr);
 // console.log(result);
+
+// 11. дан массив из 10 случайных чисел (НЕ ПОСЛЕДОВАТЕЛЬНЫХ)
+// пользователь вводит число n, вывести в консоль элемент массива
+// который наиболее близок к n (если таких элементов несколько, вывести несколько)
+
+// =========== VAR II ========================================
+//let inputUserNumber = +prompt('enter number');
+
+// let arr = new Array(10);
+// let min = Math.ceil(-100);
+// let max = Math.floor(100);
+// let minimumDistance = 0;
+// let tempMinDistance = 0;
+// let checkingDistanceForNextElement = 0;
+
+// let inputUserNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+// console.log(inputUserNumber);
+// for (let i = 0; i < arr.length; i++) {
+//     // Максимум и минимум включаются
+//     arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
+
+//     if (i === 0) {
+
+//         minimumDistance = arr[i] - inputUserNumber;
+
+//         if (minimumDistance < 0) {
+//             minimumDistance = minimumDistance * -1;
+//         }
+
+//     } else {
+
+//         checkingDistanceForNextElement = arr[i] - inputUserNumber;
+
+//         if (checkingDistanceForNextElement < 0) {
+//             checkingDistanceForNextElement = checkingDistanceForNextElement * -1;
+//         }
+
+//         if (checkingDistanceForNextElement <= minimumDistance) {
+//             tempMinDistance = minimumDistance;
+//             minimumDistance = checkingDistanceForNextElement;
+
+//             if (minimumDistance === 0) {
+//                 minimumDistance = tempMinDistance;
+//             }
+//         }
+//     }
+// }
+
+// let result = [];
+// if (minimumDistance === 0) {
+//     console.log('Наиболее блинзкое число не обнаружено');
+// } else {
+//     for (let i = 0; i < arr.length; i++) {
+
+//         if (arr[i] - minimumDistance === inputUserNumber) {
+//             result.push(arr[i]);
+//         }
+
+//         if (arr[i] + minimumDistance === inputUserNumber) {
+//             result.push(arr[i]);
+//         }
+//     }
+
+//     console.log(minimumDistance);
+//     console.log(arr);
+//     console.log(result);
+// }
+
+
