@@ -60,8 +60,17 @@
 // rest, spread, destructuring
 // console.log( Math.max( ...arr4 ) );
 
-// let one = arr2[0];
-// // arr2[0] = 'lllllll';
+//  let one = arr2[0];
+//  console.log(arr2);
+//  arr2[0] = 'lllllll';
+//  arr3 = arr2;
+//  console.log(arr2);
+//  console.log(arr3);
+//  console.log(typeof arr3);
+
+//  arr3[0] = 33333;
+//  console.log(arr2);
+
 
 // // внизу ошибка
 // console.log([10,20,30].slice(1).concat([1,2,3]).push(10,20).splice(1,1));
@@ -77,68 +86,84 @@
 // console.log(a);
 
 // Даны 2 массива:
-let people1 = ['Samuel', 'Jack', 'Thomas', 'Henry', 'Leo', 'Connor', 'David', 'Ryan'];
-let people2 = ['Connor', 'Stanley', 'Leo', 'Albert', 'Owen', 'Oliver', 'Ethan', 'Thomas'];
+// let people1 = ['Samuel', 'Jack', 'Thomas', 'Henry', 'Leo', 'Connor', 'David', 'Ryan'];
+// let people2 = ['Connor', 'Stanley', 'Leo', 'Albert', 'Owen', 'Oliver', 'Ethan', 'Thomas'];
 
 // 1. Пользователь вводит имя, если это имя есть в массиве people1, добавьте это имя в конец people2.
-// let inputName = prompt("Введите имя")
-// for (let i = 0; i < people1.length; i++) {
-//     if (inputName === people1[i]) {
-//         people2.push(inputName);
-//     }
+// let inputName = prompt("Введите имя");
+// if(people1.includes(inputName)) {
+//     people2.push(inputName);
 // }
 // console.log(people2);
 
 // 2. Пользователь вводит имя, если это имя есть в массиве people2, удалите это имя из массива.
-// let inputName = prompt("Введите имя")
-// for (let i = 0; i < people2.length; i++) {
-//     if (inputName === people2[i]) {
-//        people2.splice(i, 1);//delete people2[i];
-//     }
+// let inputName = prompt("Введите имя");
+// if(people2.includes(inputName)) {
+//     people2.splice(people2.indexOf(inputName), 1);
 // }
 // console.log(people2);
 
 // 3. Создайте массив только из тех имен, которые совпадают в обоих массивах.
 // let arrResult = [];
 // for (let i = 0; i < people1.length; i++) {
-//     for (let j = 0; j < people2.length; j++) {
-//         if (people1[i] === people2[j]) {
-//             arrResult.push(people1[i]);
-//         }
+//     if (people2.includes(people1[i])) {
+//         arrResult.push(people1[i]);
 //     }
 // }
 // console.log(arrResult);
 
 // 4. Объедините массивы people1 и people2 так, чтобы в получившемся массиве не было одинаковых имен.
-let arrResult = []
-for (let i = 0; i < people1.length; i++) {
-    for (let j = 0; j < people2.length; j++) {
-        if (arrResult[i] === arrResult[j]) {
-           arrResult.push(people1[i]);
-          
-        }
-    }
-}
-console.log(arrResult);
+// let arrResult = []
+// for (let i = 0; i < people1.length; i++) {
+//     if (!people2.includes(people1[i])) {
+//         arrResult.push(people1[i]);
+//     }
 
-// 5. Отсортируйте получившийся массив по алфавиту
+//     if (!people1.includes(people2[i])) {
+//         arrResult.push(people2[i]);
+//     }
+// }
+// console.log(arrResult);
+
+// // 5. Отсортируйте получившийся массив по алфавиту
+// arrResult.sort();
+// console.log(arrResult);
 
 
 // 1. Дан массив ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
 // Вырезать из массива "David", "Lambert", "Eddie" и записать их в отдельный массив
+// let arr = ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
+// let arrResult = [];
+// arrResult.push(arr.splice(arr.indexOf('David'), arr.indexOf('Eddie') - 1));
+// console.log(arrResult);
+// console.log(arr);
 
 // 2. Дан массив ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
 // Переставить "Janett", "Franz" в начало массива
+// let arr = ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
+// arr = arr.slice(arr.indexOf("Janett"), arr.indexOf("Franz") + 1).concat(arr.slice(0, arr.indexOf("Janett")));
+// console.log(arr);
 
 // 3. Дан массив ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
 // Заменить "Eddie", "Janett" на "Oleg","Valerchik"
+// let arr = ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
+// arr.splice(arr.indexOf("Eddie"), 1, "Oleg");
+// arr.splice(arr.indexOf("Janett"), 1, "Valerchik");
+// console.log(arr);
 
 // 4. Дан массив ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
 // "Перевернуть" массив, заменить первые 4 элемента на Митрофанов ("Mitrofan")
+// let arr = ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
+// arr.reverse();
+// arr.splice(0, 4, "Mitrofan", "Mitrofan", "Mitrofan", "Mitrofan");
+// console.log(arr);
 
-// 5. Даны два массива 
-// ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"]
-// ["Nikodim","Evlampij","Aristarkh","Drogolub","Vitalij"]
+// 5. Даны два массива
+let arr1 = ["John", "Peter", "David", "Lambert", "Eddie", "Janett", "Franz"];
+let arr2 = ["Nikodim", "Evlampij", "Aristarkh", "Drogolub", "Vitalij"];
 
 // взять из второго массива все имена начина с "Aristarkh" (включительно)
 // и добавить их в 1ый массив (не должно получится двумерного массива)
+
+arr1 = arr1.concat(arr2.slice(arr2.indexOf("Aristarkh")));
+console.log(arr1);
