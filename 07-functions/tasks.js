@@ -64,8 +64,8 @@
 // написать функцию которая возвращает среднее арифметическое 
 // 4х чисел
 
-function average(a, b, c, d) {
-    return (average(a + b + c + d) / 4);
-};
+// function average(a, b, c, d) {
+//     return (average(a + b + c + d) / 4);
+// };
 
-console.log(average(1, 2, 3, 4));
+// console.log(average(1, 2, 3, 4));

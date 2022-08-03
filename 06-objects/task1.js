@@ -181,8 +181,8 @@
 //     a: 2,
 //     b: 1
 // }, {
-//     a: 12,
-//     b: 5
+//     a: 5,
+//     b: 12
 // }, {
 //     a: 95,
 //     b: 7
@@ -213,8 +213,6 @@
 //     b: 49
 // }]
 
-// const [atesttttt, b, ...blabla] = arr;
-// Дисериализация надо делать и пользоваться push()
 // const arr = [{
 //     a: 2,
 //     b: 1
@@ -226,16 +224,43 @@
 //     b: 49
 // }]
 
-// const [a, b = 0, ...arr2] = arr;
-
-// for (let index = 0; index < arr.length; index++) {
-//     arr2[index].b = (Math.pow(arr[index].b, 2));
+// const arr2 = [];
+// for (let i = 0; i < arr.length; i++) {
+//     arr2.push({ ...arr[i] });
+//     arr2[i].b = Math.pow(arr[i].b, 2);
 // }
-// console.log(arr2);
+
 // console.log(arr);
+// console.log(arr2);
 
 // 4. создать массив на основе предыдущего, в котором
 // поля a и b будут последовательно помещены в массив
 // пример: [2, 1, 5, 144, 95, 49]
-// сделать масив из объекта
+
+// const arr3 = [];
+// for (let i = 0; i < arr2.length; i++) {
+//     arr3.push(arr2[i].a, arr2[i].b);
+// }
+// console.log(arr3);
+
+// Задача с темы функции.
+// написать функцию которая возвращает среднее арифметическое 
+// n чисел
+// const average = arr => arr.reduce((a, b) => a + b)/arr.length;
+
+arrTest = [2, 1, 5, 144, 95, 49];
+const average = function (...arrN) {
+
+    let sum = 0;
+    let arrResult = arrN.flat();
+
+    for (let i = 0; i < arrResult.length; i++) {
+        sum += arrResult[i];
+    }
+
+    return sum / arrResult.length;
+};
+
+console.log(average(arrTest));
+
 
