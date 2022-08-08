@@ -162,6 +162,7 @@
 // возвращает тот массив сумма элементов которого
 // наибольшая
 
+// ---- V I ----
 // let n = Math.floor(Math.random() * 8) + 2; // строк
 // let m = Math.abs(Math.ceil(8 - n)); // столбцов
 
@@ -174,6 +175,24 @@
 
 //     arr[i] = [];
 //     for (let j = 0; j < Math.ceil(Math.random() * m + 1) + countElement; j++) {
+//         if (countElement === 0) { break; }
+
+//         arr[i][j] = Math.floor(Math.random() * (max - min + 1)) + min;;
+//         countElement--;
+//     }
+// }
+// console.log(arr);
+
+// ---- V II ----
+// let arr = [];
+// let max = 100;
+// let min = -100;
+// let countElement = 8;
+// for (let i = 0; ; i++) {
+//     if (countElement === 0) { break; }
+
+//     arr[i] = [];
+//     for (let j = 0; j < Math.floor(Math.random() * 7) + 1; j++) {
 //         if (countElement === 0) { break; }
 
 //         arr[i][j] = Math.floor(Math.random() * (max - min + 1)) + min;;
@@ -203,6 +222,7 @@
 
 //     return arrResult;
 // }
+
 // console.log(getArrayMaxSum(arr));
 
 // 8. Написать программу, которая спрашивает у пользователя сколько ему
@@ -240,91 +260,91 @@
 // «Загаданное число больше указанного вами». Выигрывает тот игрок,
 // который за наименьшее количество попыток отгадает число.
 
-function isValid(value) {
-    if (isNaN(+value) || +value <= 0 ||
-        value === null || value === '') {
-        return false;
-    }
+// function isValid(value) {
+//     if (isNaN(+value) || +value <= 0 ||
+//         value === null || value === '') {
+//         return false;
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
-function getNumber(message) {
-    let inputUserNumber;
-    do {
-        inputUserNumber = prompt(message);
-    } while (!isValid(inputUserNumber));
+// function getNumber(message) {
+//     let inputUserNumber;
+//     do {
+//         inputUserNumber = prompt(message);
+//     } while (!isValid(inputUserNumber));
 
-    return Number(inputUserNumber);
-}
+//     return Number(inputUserNumber);
+// }
 
-function getMessageAboutYouNumber(secretNumber, number) {
-    if (secretNumber < number) {
-        return 'Загаданное число меньше указанного вами.';
-    } else if (secretNumber > number) {
-        return 'Загаданное число больше указанного вами.';
-    }
+// function getMessageAboutYouNumber(secretNumber, number) {
+//     if (secretNumber < number) {
+//         return 'Загаданное число меньше указанного вами.';
+//     } else if (secretNumber > number) {
+//         return 'Загаданное число больше указанного вами.';
+//     }
 
-    return 'Введенное число равно загаданному числу.';
-}
+//     return 'Введенное число равно загаданному числу.';
+// }
 
-function startGameGuessNumber() {
+// function startGameGuessNumber() {
 
-    const playerOneMaxNumber =
-        getNumber(`Игрок1 укажите максимальное число(max)\n` + `до которого можно загадывать.`);
+//     const playerOneMaxNumber =
+//         getNumber(`Игрок1 укажите максимальное число(max)\n` + `до которого можно загадывать.`);
 
-    let playerTwoSecretNumber;
-    do {
-        playerTwoSecretNumber =
-            getNumber(`Игрок2 укажите число n от 1 до ${playerOneMaxNumber}.\nКоторое нужно отгадывать.`);
+//     let playerTwoSecretNumber;
+//     do {
+//         playerTwoSecretNumber =
+//             getNumber(`Игрок2 укажите число n от 1 до ${playerOneMaxNumber}.\nКоторое нужно отгадывать.`);
 
-        if (playerTwoSecretNumber > playerOneMaxNumber) {
-            alert(`Число должно быть меньше ${playerOneMaxNumber} (max)`);
-        }
+//         if (playerTwoSecretNumber > playerOneMaxNumber) {
+//             alert(`Число должно быть меньше ${playerOneMaxNumber} (max)`);
+//         }
 
-    } while (playerTwoSecretNumber > playerOneMaxNumber);
+//     } while (playerTwoSecretNumber > playerOneMaxNumber);
 
-    let timesGuess = 1;
-    while (true) {
+//     let timesGuess = 1;
+//     while (true) {
 
-        let playerGuessNumber;
-        do {
-            playerGuessNumber = prompt(`Угадай число.`);
+//         let playerGuessNumber;
+//         do {
+//             playerGuessNumber = prompt(`Угадай число.`);
 
-            if (playerGuessNumber === null) {
-                alert('Вы проиграли!\nВы сдались.');
-                return;
-            }
+//             if (playerGuessNumber === null) {
+//                 alert('Вы проиграли!\nВы сдались.');
+//                 return;
+//             }
 
-        } while (!isValid(playerGuessNumber));
+//         } while (!isValid(playerGuessNumber));
 
-        playerGuessNumber = Number(playerGuessNumber);
-        if (
-            getMessageAboutYouNumber(playerTwoSecretNumber, playerGuessNumber) ===
-            'Введенное число равно загаданному числу.'
-        ) {
+//         playerGuessNumber = Number(playerGuessNumber);
+//         if (
+//             getMessageAboutYouNumber(playerTwoSecretNumber, playerGuessNumber) ===
+//             'Введенное число равно загаданному числу.'
+//         ) {
 
-            if (
-                confirm
-                    (
-                        `Вы выиграли!\n` +
-                        `Вы сделали ${timesGuess} попытки.\n` +
-                        `Начать новую игру нажмите ОК.\n` +
-                        `Завершить игру нажмите ОТМЕНА.`
-                    )
-            ) {
-                return startGameGuessNumber();
-            } else {
-                return;
-            }
+//             if (
+//                 confirm
+//                     (
+//                         `Вы выиграли!\n` +
+//                         `Вы сделали ${timesGuess} попытки.\n` +
+//                         `Начать новую игру нажмите ОК.\n` +
+//                         `Завершить игру нажмите ОТМЕНА.`
+//                     )
+//             ) {
+//                 return startGameGuessNumber();
+//             } else {
+//                 return;
+//             }
 
-        } else {
-            alert(getMessageAboutYouNumber(playerTwoSecretNumber, playerGuessNumber));
-        }
+//         } else {
+//             alert(getMessageAboutYouNumber(playerTwoSecretNumber, playerGuessNumber));
+//         }
 
-        timesGuess++;
-    }
-}
+//         timesGuess++;
+//     }
+// }
 
-startGameGuessNumber();
+// startGameGuessNumber();
 
