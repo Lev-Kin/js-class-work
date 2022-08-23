@@ -13,6 +13,25 @@
 функция должна возвращать двумерный массив футболистов сформированный по принципу: 1 массив - 1 команда
 пример возвращаемого массива:
 
+onst playersByTeams = players.reduce((teamsObj, item) => {
+    if (teamsObj[item.team]) {
+        teamsObj[item.team].push(item);
+    }  else {
+        teamsObj[item.team] = [item];
+    }
+
+    return teamsObj;
+}, {});
+
+// const playersByTeams = players.reduce((teamsObj, item) => ({
+//     ...teamsObj,
+//     [item.team]: teamsObj[item.team] ? [...teamsObj[item.team], item] : [item]
+// }), {});
+
+const result = Object.keys(playersByTeams).map((teamName) => playersByTeams[teamName]);
+
+console.log(result);
+
 [
 	[
 		{
@@ -171,6 +190,16 @@
 // значение необходимо записать в массив. С помощью
 // метода .every() проверить были ли все введенные
 // пользователем данные – числами.
+
+let arr = [];
+
+for (let i = 0; i < 3; i++) {
+    arr.push(prompt('enter smth'));
+}
+
+const res = arr.every((item) => !isNaN(item) && item);
+
+console.log(res);
 
 
 
@@ -446,91 +475,6 @@ addAbility(array), которая добавляет к каждому
 объекту массива функцию run(), при запуске которой
 выводится сообщение (“ИМЯ_ФУТБОЛИСТА is
 running”)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function finding (arr) {
-    arr.reduce((acc, item, index) => {
-        for (let key of item)
-    }, [])
-    console.log(gamer1)
-}
-finding([
-    { name:"Ronaldo", team:"Juventus"}, 
-    { name:"Messi", team:"Barcelona"},
-    { name:"Pedro", team:"Chelsea" },
-    { name:"Rico", team:"PSG"},
-    { name:"Suarez", team:"Barcelona" },
-    { name:"Buffon", team:"Juventus" },
-    { name:"Zuma", team:"Chelsea" },
-    { name:"Gonsalo", team:"Juventus"}
-])
-
-
-
-// const check = {
-//     checkNameLength(){
-//        return this.name.length > 4
-//     },
-//     checkIsAdult(){
-//        return this.age >= 18
-// };
-// const person1 = {
-//     name: 'Alla',
-//     age: 55,
-// };
-// const person2 = {
-//     name: 'Vladik',
-//     age: 16,
-// };
-// console.log(check.checkNameLength.call(person1))
-// console.log(check.checkNameLength.call(person2))
-// console.log(check.checkIsAdult.call(person1))
-// console.log(check.checkIsAdult.call(person2))
-
-
-// 2. Создать объект person с полем name и методом eat.
-// Создать массив строк food в котором перечисляется любая еда (не менее 4 наименований)
-// Метод eat должен принимать строку food с названием еды и возвращать строку вида 
-// person.name + " eats " + food
-// Используя setTimeout или setInterval запустите метод eat объекта person раз в секунду, передавая при этом каждый раз следующее название еды из массива.
-
-// const person = {
-//     name: 'Germiona',
-//     eat (food) {
-//         return console.log(`${person.name} eats ${food}`);
-//     },
-// }
-// let food = ['meat', 'fish', 'biscuits', 'cherry'];
-// for (let i = 0; i < food.length; i++){
-//     const id = setInterval(person.eat, 1000, food[i])
-//     setTimeout(() => {clearInterval(id)}, 4000)
-// }
 
 
 

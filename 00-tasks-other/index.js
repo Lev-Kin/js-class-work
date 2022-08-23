@@ -21,7 +21,7 @@
 // массива.
 
 // const arrNumber = [2, 1, 3, 111, 2, 2, 42, 123];
-// let sum = arrNumber.reduce((acc, item) => (!(item % 2) ? acc + item : acc), 0);
+// let sum = arrNumber.reduce((acc, item) => (item % 2 ? acc : acc + item), 0);
 // console.log(sum);
 
 // 3. Пользователь вводит 10 случайных значений. Каждое
@@ -29,13 +29,14 @@
 // метода .every() проверить были ли все введенные
 // пользователем данные – числами.
 
-// let arrNumber = new Array(10);
-// for (let i = 0; i < arrNumber.length; i++) {
-//   arrNumber[i] = prompt("Pleace enter number");
+// ?????????????????????????????
+// let arrNumber = [];
+// for (let i = 0; i < 10; i++) {
+//   arrNumber.push(prompt("Pleace enter number"));
 // }
 // console.log(arrNumber);
 
-// const result = arrNumber.every((item) => !isNaN(item));
+// const result = arrNumber.every((item) => !isNaN(item) && item);
 // console.log(result);
 
 // 4. Создать объект check с двумя методами:
@@ -78,20 +79,20 @@
 // Используя setTimeout или setInterval запустите метод eat объекта person раз в секунду,
 // передавая при этом каждый раз следующее название еды из массива.
 
-const person = {
-    name: 'Lena',
-    eat(food) {
-        return `${person.name} eats ${food}`;
-    },
-}
+// const person = {
+//     name: 'Lena',
+//     eat(food) {
+//         return `${person.name} eats ${food}`;
+//     },
+// }
 
-let food = ['sushi', 'salad', 'vodka', 'strawberry'];
-let count = 0;
-let id = setInterval(() => {
-    console.log(person.eat(food[++count]));
-}, 1000);
+// let food = ['sushi', 'salad', 'vodka', 'strawberry'];
+// let count = 0;
+// let id = setInterval(() => {
+//     console.log(person.eat(food[count++]));
+// }, 1000);
 
-setTimeout(() => { clearInterval(id) }, 4000);
+// setTimeout(() => { clearInterval(id) }, 4000);
 
 // === Part II ===
 // 1. Создать функцию которая принимает массив футболистов
@@ -267,6 +268,41 @@ setTimeout(() => { clearInterval(id) }, 4000);
 // 2.3 найти хотя бы одно авто мощность двигателя которого больше 500
 // 2.4 найти самое дешевое авто по наименьшей цене
 
+
+
+// ==============================================================================
+// Доп задания
+
+// 1
+
+// Дана строка
+// let str = 'Мама мыла раму';
+// Написать функцию toWash(str, thing);
+// Где str - это строка в которой надо поменять последнее
+// слово, а thing - это, то самое слово которое надо вставить
+// в конец строки.
+// Функция должна возвращать строку.
+// Например:
+// document.write( toWash(str, ’машину’) );
+// // ‘Мама мыла машину’
+// document.write( toWash(str, ’рябину’) );
+// // ‘Мама мыла рябину’
+// document.write( toWash(str, ‘картину’) );
+// // ‘Мама мыла картину’
+// let thing = 'машину';
+function toWash(str, thing){
+  return [].concat(str.split(' ')).slice(0 , 2).join(' ') + ' ' + thing;
+}
+str.split
+console.log(typeof  toWash(str, thing) );
+document.write( toWash(str, thing) );
+
+// 2.
+// . Взять массив футболистов из задачи 1. Напишите функцию
+// addAbility(array), которая добавляет к каждому
+// объекту массива функцию run(), при запуске которой
+// выводится сообщение (“ИМЯ_ФУТБОЛИСТА is
+// running”)
 
 
 
