@@ -293,7 +293,9 @@
 function toWash(str, thing){
   return [].concat(str.split(' ')).slice(0 , 2).join(' ') + ' ' + thing;
 }
-str.split
+//return str.split(" ").slice(0, 2).concat([thing]).join(" ");
+
+
 console.log(typeof  toWash(str, thing) );
 document.write( toWash(str, thing) );
 
