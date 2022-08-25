@@ -32,6 +32,29 @@ const result = Object.keys(playersByTeams).map((teamName) => playersByTeams[team
 
 console.log(result);
 
+// function sortPlayers(players) {
+
+//     const sortedPlayers = [];
+//     const sortedByTeamName = players.sort(
+//         (a, b) => a.team > b.team ? 1 : (b.team > a.team) ? -1 : 0
+//     );
+
+//     sortedPlayers.push(
+//         sortedByTeamName.reduce((team, player) => {
+//             if (team[0]?.team === player.team || team.length === 0) {
+//                 team.push(player);
+//                 return team;
+//             } else {
+//                 sortedPlayers.push(team)
+//                 return [player]
+//             }
+//         }, [])
+//     );
+
+//     return sortedPlayers;
+// }
+
+// console.log(sortPlayers(players));
 [
 	[
 		{
