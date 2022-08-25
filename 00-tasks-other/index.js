@@ -235,7 +235,7 @@ const findLowerPriceCar = arrCars.
     find(({ specs: { price: { low } } }) =>
         low === arrCars.
             reduce((acc, { specs: { price: { low } } }) =>
-                acc < low ? acc : low));
+                (acc < low ? acc : low), low));
 
 console.log(findLowerPriceCar);
 
