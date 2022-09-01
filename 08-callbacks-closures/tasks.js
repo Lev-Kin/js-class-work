@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 // callback
 // hof
@@ -280,7 +280,7 @@
 // function toggleMe() {
 //   let a = true;
 //   return function foo() {
-//     return a = !a;
+//     return (a = !a);
 //   };
 // }
 
@@ -300,37 +300,71 @@
 // если передать число больше 10, то функция считает
 // количество от этого числа до 0
 
-// function funcCounter(num) {
-//   let count = num;
+/* Преподователь
+function countMaker() {
+  let count = 0;
+  let shouldRaise = true;
+
+  return function (num) {
+    if (num && !isNaN(num) && typeof === 'number') {
+      count = num;
+      shouldRaise = num < 10;
+    }
+
+    if (shouldRaise) {
+      return ++count;
+    } else {
+      return count ? --count : 0;
+    }
+  };
+}
+*/
+
+// function funcCounter() {
 //   let sum = 0;
-//   return function a() {
+//   let count = 0;
+//   return function a(num) {
 
-//     if (num < 10) {
+//     if (typeof num !== "undefined") {
 
-//       // if (count === 500) {
-//       //   return sum;
-//       // }
+//       count = num;
 
-//       sum++;
-//       count++
-//       a();
-//       return sum;
+//       if (num < 10) {
 
-//     } else {
+//         if (count === 500) {
+//           return sum;
+//         }
 
-//       if (count === 0) {
+//         ++sum;
+//         ++count;
+
 //         return sum;
-//       }
+//       } else {
 
-//       sum++;
-//       count--;
-//       a();
-//       return sum;
+//         if (count === 0) {
+//           return sum;
+//         }
+
+//         --count;
+
+//        return sum;
+//       }
+//     }else{
+
+//         return ++count;
+
 //     }
 //   };
 // }
 
-// let c = funcCounter(13);
+// let c = funcCounter();
+
+// console.log(c());
+// console.log(c());
+// console.log(c());
+// console.log(c(13));
+// console.log(c());
+// console.log(c());
 // console.log(c());
 
 // 3. Создать функцию classNameEditor(), которая
@@ -346,18 +380,20 @@
 // function classNameEditorAdd() {
 //   let classNameStr = '';
 
-//   return function (str, isAdding) {
+//   return function (str, isAdd) {
 
-//     if (isAdding) {
+//     if (isAdd) {
 
-//       classNameStr += ' ' + str;
+//     if(!classNameStr.split(' ').includes(str)){
+//         classNameStr += ` ${str}`;
+//     }
 
-//     } else if (!isAdding) {
+//     } else if (!isAdd) {
 
 //       let arrClassName = classNameStr.split(' ');
 //       let indexDeleteClass = arrClassName.indexOf(str);
 
-//       if (indexDeleteClass != -1) {
+//       if (indexDeleteClass !== -1) {
 //         arrClassName.splice(indexDeleteClass, 1);
 //         classNameStr = arrClassName.join(' ');
 //       }
@@ -370,6 +406,7 @@
 // const classNameEditor = classNameEditorAdd();
 // console.log(classNameEditor('active', true)); // добавляем класс ====>>>>> 'active'
 // console.log(classNameEditor('test', true)); // =====>>>>> 'active test'
+// console.log(classNameEditor('btn', true)); // =====>>>>> 'active test btn'
 // console.log(classNameEditor('btn', true)); // =====>>>>> 'active test btn'
 // console.log(classNameEditor('test', false)); // =====>>>>> 'active btn'
 // console.log(classNameEditor('blabla', false)); // =====>>>>> 'active btn'
@@ -458,22 +495,47 @@
 // }
 
 // 7. Создать объект
-// kurochka = {
-// 	name: 'Ryaba',
-// 	isAlive: true,
-// 	isZazharena: false
-// }
+const kurochka = {
+  name: "Ryaba",
+  isAlive: true,
+  isZazharena: false,
 
-// измените объект так, чтобы после изменения поля isZazharena = true, поле isAlive автоматически стало false,
-// поле isAlive должно быть доступно только для чтения. После изменения isZazharena - это поле должно стать доступно только для чтения
+  get Zazharena() {
+    return this.isZazharena;
+  },
 
+  get Alive() {
+    return this.isAlive;
+  },
 
+  /**
+   * @param {boolean} value
+   */
+  set changeAlive(value) {
+    this.isAlive = value;
+  },
+};
 
+kurochka.isZazharena = true;
+if (kurochka.Zazharena) {
+  kurochka.Alive = false;
+}
 
+Object.defineProperties(kurochka, {
+  'isAlive': {
+    writable: true
+  },
+  'isZazharena': {
+    writable: true
+  }
+});
 
+console.log(kurochka);
 
-
-
+// измените объект так, чтобы после изменения поля isZazharena = true,
+// поле isAlive автоматически стало false,
+// поле isAlive должно быть доступно только для чтения.
+// После изменения isZazharena - это поле должно стать доступно только для чтения
 
 // // Сделать так, чтобы свойства f и l нельзя было изменять напрямую.
 // // Создать функции-сеттеры setFirstName() и setLastName(), которые позволят изменить данные свойства.
