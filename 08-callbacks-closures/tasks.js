@@ -270,7 +270,9 @@
 // console.log(subLogger(2, 3));
 // console.log(replaceLastLogger(['a', 'b', 'c'], 'd', 20));
 
-// ===========================================================
+// ====================================================================
+// ====================================================================
+// ====================================================================
 // 1. Создать функцию «переключатель» toggleMe(),
 // которая при вызове чередует возвращаемые булевы
 // значения (true, false).
@@ -298,30 +300,39 @@
 // если передать число больше 10, то функция считает
 // количество от этого числа до 0
 
-function funcCounter(num) {
-  let count = num;
-  return function () {
-    if (num > 10) {
-      return count++;
-    } else {
-      return count--;
-    }
-  };
-}
+// function funcCounter(num) {
+//   let count = num;
+//   let sum = 0;
+//   return function a() {
 
-let c = funcCounter(11);
+//     if (num < 10) {
 
-// while(c() > 10){
-//   console.log(c());
+//       // if (count === 500) {
+//       //   return sum;
+//       // }
+
+//       sum++;
+//       count++
+//       a();
+//       return sum;
+
+//     } else {
+
+//       if (count === 0) {
+//         return sum;
+//       }
+
+//       sum++;
+//       count--;
+//       a();
+//       return sum;
+//     }
+//   };
 // }
 
-console.log(c());
-console.log(c());
-console.log(c());
-console.log(c());
+// let c = funcCounter(13);
+// console.log(c());
 
-
-// console.log(funcCounter(9));
 // 3. Создать функцию classNameEditor(), которая
 // принимает строку с названием класса и добавляет
 // его в класс, если вторым параметром было
@@ -332,17 +343,61 @@ console.log(c());
 // класса. Функция должна возвращать текущее
 // название класса.
 
-// classNameEditor('active', true) // добавляем класс ====>>>>> 'active'
-// classNameEditor('test', true) // =====>>>>> 'active test'
-// classNameEditor('btn', true) // =====>>>>> 'active test btn'
-// classNameEditor('test', false) // =====>>>>> 'active btn'
-// classNameEditor('blabla', false) // =====>>>>> 'active btn'
+// function classNameEditorAdd() {
+//   let classNameStr = '';
 
-// .split()
-// .join()
+//   return function (str, isAdding) {
+
+//     if (isAdding) {
+
+//       classNameStr += ' ' + str;
+
+//     } else if (!isAdding) {
+
+//       let arrClassName = classNameStr.split(' ');
+//       let indexDeleteClass = arrClassName.indexOf(str);
+
+//       if (indexDeleteClass != -1) {
+//         arrClassName.splice(indexDeleteClass, 1);
+//         classNameStr = arrClassName.join(' ');
+//       }
+//     }
+
+//     return classNameStr;
+//   };
+// }
+
+// const classNameEditor = classNameEditorAdd();
+// console.log(classNameEditor('active', true)); // добавляем класс ====>>>>> 'active'
+// console.log(classNameEditor('test', true)); // =====>>>>> 'active test'
+// console.log(classNameEditor('btn', true)); // =====>>>>> 'active test btn'
+// console.log(classNameEditor('test', false)); // =====>>>>> 'active btn'
+// console.log(classNameEditor('blabla', false)); // =====>>>>> 'active btn'
 
 // 4. Создать функцию, которая принимает массив и callback. Функция
 // должна каждый элемент массива обрабатывать callback’ом.
+
+// let array = new Array(10).fill(0);
+// array.forEach((element, index, array) => array[index] = Math.floor(Math.random() * 100) + 1);
+
+// function increasing(arr) {
+//   arr++;
+//   return arr;
+// }
+
+// function descending(arr) {
+//   arr--;
+//   return arr;
+// }
+
+// function processArrayCallback(array, callback) {
+//   let arrayN = [];
+//   array.forEach(element => arrayN.push(callback(element)));
+//   return arrayN;
+
+// }
+// console.log(processArrayCallback(array, increasing));
+// console.log(array);
 
 // arr.map(() => {})
 // map(arr, () => {})
@@ -352,14 +407,55 @@ console.log(c());
 // функцию sumTo возвращать результат в виде числа, строки или
 // логического типа данных.
 
-// function toString (val) { return val + ''; }
+// function sumTo(number1, number2, callback) {
+//   let value = number1 + number2;
+//   return callback(value);
+// }
 
-// sumTo(2,3, someCallback)
+// function toNumber(value) {
+//   return Number(value);
+// }
+
+// function toString(value) {
+//   return String(value);
+// }
+
+// function toBoolean(value) {
+//   return Boolean(value);
+// }
+
+// const result = sumTo(2, 3, toString);
+// console.log(result);
+// console.log(typeof result);
 
 // 6. Создать функцию checkLogin, которая принимает 4 параметра. 1
 // параметр - это логин, введенный пользователем, 2 –
 // правильный логин, 3 – callback, который вызовется если логин
 // верный, 4 – callback, который вызовется если логин ложный.
+
+// function loginCorrect() {
+//   return true;
+// }
+
+// function loginInvalid() {
+//   return false;
+// }
+
+// function checkLogin(loginUserInput, loginUserСorrect, callbackLoginCorrect, callbackLoginInvalid) {
+//   if (loginUserInput === loginUserСorrect) {
+//     return callbackLoginCorrect();
+//   } else {
+//     return callbackLoginInvalid();
+//   }
+// }
+
+// let loginUserInput = prompt('Введите логин');
+// let loginUserСorrect = 'Oleg';
+// if (checkLogin(loginUserInput, loginUserСorrect, loginCorrect, loginInvalid)) {
+//   console.log('Login is correct');
+// } else {
+//   console.log('Login is invalid');
+// }
 
 // 7. Создать объект
 // kurochka = {
@@ -370,3 +466,56 @@ console.log(c());
 
 // измените объект так, чтобы после изменения поля isZazharena = true, поле isAlive автоматически стало false,
 // поле isAlive должно быть доступно только для чтения. После изменения isZazharena - это поле должно стать доступно только для чтения
+
+
+
+
+
+
+
+
+
+// // Сделать так, чтобы свойства f и l нельзя было изменять напрямую.
+// // Создать функции-сеттеры setFirstName() и setLastName(), которые позволят изменить данные свойства.
+// let uO = u.getLogin();
+
+// console.log(u);
+// console.log(u.f, `'s login is: `, uO);
+
+// Object.defineProperties(u, {
+//   'f': {
+//     writable: false
+//   },
+//   'l': {
+//     writable: false
+//   }
+// });
+
+// u.f = 'AAA';
+// console.log('{writable:false}. u.f ="AAA" ; f?', u.f === 'AAA');
+
+// let setNewName = (key, changeValue) => {
+//   Object.defineProperty(u, key, {
+//     get() { return changeValue; },
+//     set(newValue) { changeValue = newValue; }
+//   })
+// }
+// setNewName('f', 'BBB');
+// setNewName('l', 'CCC');
+// console.log(`New n u is set by Setter Function: ${u.f} ${u.l}, but login is: ${uO}`);
+
+// // //===== clonung function  =====//
+// // function cloneObject(src) {
+// //   let target = {};
+// //   if (Array.isArray(src)) {
+// //     target = [];
+// //   }
+// //   for (let key in src) {
+// //     target[key] = src[key];
+// //     if (typeof (target[key]) === 'object') {
+// //       target[key] = cloneObject(src[key]);
+// //     }
+// //   }
+// //   return target;
+// // }
+// // //=============================//
