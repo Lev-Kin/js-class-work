@@ -1,4 +1,4 @@
-//"use strict";
+"use strict";
 
 // callback
 // hof
@@ -306,7 +306,7 @@ function countMaker() {
   let shouldRaise = true;
 
   return function (num) {
-    if (num && !isNaN(num) && typeof === 'number') {
+    if (num && !isNaN(num) && typeof num === 'number') {
       count = num;
       shouldRaise = num < 10;
     }
@@ -320,44 +320,7 @@ function countMaker() {
 }
 */
 
-// function funcCounter() {
-//   let sum = 0;
-//   let count = 0;
-//   return function a(num) {
-
-//     if (typeof num !== "undefined") {
-
-//       count = num;
-
-//       if (num < 10) {
-
-//         if (count === 500) {
-//           return sum;
-//         }
-
-//         ++sum;
-//         ++count;
-
-//         return sum;
-//       } else {
-
-//         if (count === 0) {
-//           return sum;
-//         }
-
-//         --count;
-
-//        return sum;
-//       }
-//     }else{
-
-//         return ++count;
-
-//     }
-//   };
-// }
-
-// let c = funcCounter();
+// let c = countMaker();
 
 // console.log(c());
 // console.log(c());
@@ -495,6 +458,10 @@ function countMaker() {
 // }
 
 // 7. Создать объект
+// измените объект так, чтобы после изменения поля isZazharena = true,
+// поле isAlive автоматически стало false,
+// поле isAlive должно быть доступно только для чтения.
+// После изменения isZazharena - это поле должно стать доступно только для чтения
 const kurochka = {
   name: "Ryaba",
   isAlive: true,
@@ -511,62 +478,37 @@ const kurochka = {
   /**
    * @param {boolean} value
    */
+  set changeZazharena(value) {
+    this.isZazharena = value;
+  },
+
+  /**
+   * @param {boolean} value
+   */
   set changeAlive(value) {
     this.isAlive = value;
   },
 };
 
-kurochka.isZazharena = true;
+kurochka.changeZazharena = true;
 if (kurochka.Zazharena) {
-  kurochka.Alive = false;
+  kurochka.isAlive = false;
 }
 
 Object.defineProperties(kurochka, {
   'isAlive': {
-    writable: true
+    writable: false
   },
   'isZazharena': {
-    writable: true
+    writable: false
   }
 });
 
 console.log(kurochka);
+// kurochka.isAlive = true;
+// console.log(kurochka);
 
-// измените объект так, чтобы после изменения поля isZazharena = true,
-// поле isAlive автоматически стало false,
-// поле isAlive должно быть доступно только для чтения.
-// После изменения isZazharena - это поле должно стать доступно только для чтения
-
-// // Сделать так, чтобы свойства f и l нельзя было изменять напрямую.
-// // Создать функции-сеттеры setFirstName() и setLastName(), которые позволят изменить данные свойства.
-// let uO = u.getLogin();
-
-// console.log(u);
-// console.log(u.f, `'s login is: `, uO);
-
-// Object.defineProperties(u, {
-//   'f': {
-//     writable: false
-//   },
-//   'l': {
-//     writable: false
-//   }
-// });
-
-// u.f = 'AAA';
-// console.log('{writable:false}. u.f ="AAA" ; f?', u.f === 'AAA');
-
-// let setNewName = (key, changeValue) => {
-//   Object.defineProperty(u, key, {
-//     get() { return changeValue; },
-//     set(newValue) { changeValue = newValue; }
-//   })
-// }
-// setNewName('f', 'BBB');
-// setNewName('l', 'CCC');
-// console.log(`New n u is set by Setter Function: ${u.f} ${u.l}, but login is: ${uO}`);
-
-// // //===== clonung function  =====//
+// // //===== cloning function  =====//
 // // function cloneObject(src) {
 // //   let target = {};
 // //   if (Array.isArray(src)) {
