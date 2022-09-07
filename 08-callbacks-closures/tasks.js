@@ -463,50 +463,49 @@ function countMaker() {
 // поле isAlive должно быть доступно только для чтения.
 // После изменения isZazharena - это поле должно стать доступно только для чтения
 const kurochka = {
-  name: "Ryaba",
-  isAlive: true,
-  isZazharena: false,
-
-  get Zazharena() {
-    return this.isZazharena;
-  },
-
-  get Alive() {
-    return this.isAlive;
-  },
-
-  /**
-   * @param {boolean} value
-   */
-  set changeZazharena(value) {
-    this.isZazharena = value;
-  },
-
-  /**
-   * @param {boolean} value
-   */
-  set changeAlive(value) {
-    this.isAlive = value;
-  },
+    name: 'Ryaba',
+    isAlive: true,
+    _isZazharena: false
 };
 
-kurochka.changeZazharena = true;
-if (kurochka.Zazharena) {
-  kurochka.isAlive = false;
-}
 
-Object.defineProperties(kurochka, {
-  'isAlive': {
+Object.defineProperty(kurochka, 'isAlive', {
     writable: false
-  },
-  'isZazharena': {
-    writable: false
-  }
 });
 
-console.log(kurochka);
+Object.defineProperty(kurochka, '_isZazharena', {
+    writable: true,
+    enumerable: false,
+    configurable: false
+});
+
+Object.defineProperty(kurochka, 'isZazharena', {
+    set (val) {
+        if (val && !this._isZazharena) {
+            this._isZazharena = val;
+
+            Object.defineProperty(this, 'isAlive', {
+                writable: true
+            });
+
+            this.isAlive = false;
+
+            Object.defineProperty(this, 'isAlive', {
+                writable: false,
+                configurable: false
+            })
+        }
+    },
+    get () {
+        return this._isZazharena;
+    }
+});
+
+
+kurochka.isZazharena = true;
 // kurochka.isAlive = true;
-// console.log(kurochka);
+
+console.log(kurochka);
 
 // // //===== cloning function  =====//
 // // function cloneObject(src) {
