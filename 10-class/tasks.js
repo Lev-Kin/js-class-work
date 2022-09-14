@@ -95,6 +95,8 @@
 //     // ...
 // }
 
+
+//===
 //======= 1.2 Наследование классов =======
 
 // class Animal {
@@ -203,6 +205,8 @@
 // Также:
 // - У функций-стрелок нет своего this и super, поэтому они «прозрачно» встраиваются во внешний контекст.
 
+
+//===
 //======= 1.3 Статические свойства и методы =======
 // class User {
 //     static staticMethod() {
@@ -212,8 +216,389 @@
 
 // User.staticMethod(); // true
 
+// class Article {
+//     constructor(title, date) {
+//         this.title = title;
+//         this.date = date;
+//     }
+
+//     static compare(articleA, articleB) {
+//         return articleA.date - articleB.date;
+//     }
+// }
+
+// // использование
+// let articles = [
+//     new Article("HTML", new Date(2019, 1, 1)),
+//     new Article("CSS", new Date(2019, 0, 1)),
+//     new Article("JavaScript", new Date(2019, 11, 1))
+// ];
+
+// articles.sort(Article.compare);
+
+// alert(articles[0].title); // CSS
+
+// class Article {
+//     constructor(title, date) {
+//         this.title = title;
+//         this.date = date;
+//     }
+
+//     static createTodays() {
+//         // помним, что this = Article
+//         return new this("Сегодняшний дайджест", new Date());
+//     }
+// }
+
+// let article = Article.createTodays();
+
+// alert(article.title); // Сегодняшний дайджест
+
+//=== Статические свойства
+// class Article {
+//     static publisher = "Илья Кантор";
+// }
+
+// alert(Article.publisher); // Илья Кантор
+
+//=== Наследование статических свойств и методов
+// class Animal {
+
+//     constructor(name, speed) {
+//         this.speed = speed;
+//         this.name = name;
+//     }
+
+//     run(speed = 0) {
+//         this.speed += speed;
+//         alert(`${this.name} бежит со скоростью ${this.speed}.`);
+//     }
+
+//     static compare(animalA, animalB) {
+//         return animalA.speed - animalB.speed;
+//     }
+
+// }
+
+// // Наследует от Animal
+// class Rabbit extends Animal {
+//     hide() {
+//         alert(`${this.name} прячется!`);
+//     }
+// }
+
+// let rabbits = [
+//     new Rabbit("Белый кролик", 10),
+//     new Rabbit("Чёрный кролик", 5)
+// ];
+
+// rabbits.sort(Rabbit.compare);
+
+// rabbits[0].run(); // Чёрный кролик бежит со скоростью 5.
+
+//=== Итого
+// Статические методы используются для функциональности, принадлежат классу «в целом», а не относятся к конкретному объекту класса.
+// Например, метод для сравнения двух статей Article.compare(article1, article2) или фабричный метод Article.createTodays().
+// В объявлении класса они помечаются ключевым словом static.
+// Статические свойства используются в тех случаях, когда мы хотели бы сохранить данные на уровне класса, а не какого-то одного объекта.
+// Синтаксис:
+// class MyClass {
+//     static property = ...;
+
+//     static method() {
+//       ...
+//     }
+// }
+// Технически, статическое объявление – это то же самое, что и присвоение классу:
+
+// MyClass.property = ...
+// MyClass.method = ...
+
+// Статические свойства и методы наследуются.
+// Для class B extends A прототип класса B указывает на A: B.[[Prototype]] = A.
+// Таким образом, если поле не найдено в B, поиск продолжается в A.
+
+//===
+//======= 1.4 Приватные и защищённые методы и свойства =======
+// class CoffeeMachine {
+//     _waterAmount = 0;
+
+//     set waterAmount(value) {
+//         if (value < 0) throw new Error("Отрицательное количество воды");
+//         this._waterAmount = value;
+//     }
+
+//     get waterAmount() {
+//         return this._waterAmount;
+//     }
+
+//     constructor(power) {
+//         this._power = power;
+//     }
+
+// }
+
+// // создаём новую кофеварку
+// let coffeeMachine = new CoffeeMachine(100);
+
+// // устанавливаем количество воды
+// coffeeMachine.waterAmount = -10; // Error: Отрицательное количество воды
+
+// class CoffeeMachine {
+//     #waterLimit = 200;
+
+//     #checkWater(value) {
+//         if (value < 0) throw new Error("Отрицательный уровень воды");
+//         if (value > this.#waterLimit) throw new Error("Слишком много воды");
+//     }
+// }
+
+// let coffeeMachine = new CoffeeMachine();
+
+// // снаружи  нет доступа к приватным методам класса
+// coffeeMachine.#checkWater(); // Error
+// coffeeMachine.#waterLimit = 1000; // Error
+
+// class CoffeeMachine {
+
+//     #waterAmount = 0;
+
+//     get waterAmount() {
+//         return this.#waterAmount;
+//     }
+
+//     set waterAmount(value) {
+//         if (value < 0) throw new Error("Отрицательный уровень воды");
+//         this.#waterAmount = value;
+//     }
+// }
+
+// let machine = new CoffeeMachine();
+
+// machine.waterAmount = 100;
+// alert(machine.#waterAmount); // Error
+
+//=== Итого
+// В терминах ООП отделение внутреннего интерфейса от внешнего называется инкапсуляция.
+// Это даёт следующие выгоды:
+
+// --- Защита для пользователей, чтобы они не выстрелили себе в ногу
+// Представьте себе, что есть команда разработчиков, использующая кофеварку.
+// Она была изготовлена компанией «Лучшие Кофеварки» и работает нормально, но защитный кожух был снят.
+// Внутренний интерфейс стал доступен извне.
+// Все разработчики культурны – они используют кофеварку по назначению.
+// Но один из них, Джон, решил, что он самый умный, и сделал некоторые изменения во внутренностях кофеварки.
+// После чего кофеварка вышла из строя через два дня.
+// Это, конечно, не вина Джона, а скорее человека, который снял защитный кожух и позволил Джону делать свои манипуляции.
+// То же самое в программировании. Если пользователь класса изменит вещи, не предназначенные для изменения извне – последствия непредсказуемы.
+
+// --- Поддерживаемость
+// Ситуация в программировании сложнее, чем с реальной кофеваркой, потому что мы не просто покупаем её один раз.
+// Код постоянно подвергается разработке и улучшению.
+
+// --- Если мы чётко отделим внутренний интерфейс, то разработчик класса сможет свободно менять
+// его внутренние свойства и методы, даже не информируя пользователей…
+// Если вы разработчик такого класса, то приятно знать, что приватные методы можно безопасно переименовывать,
+// их параметры можно изменять и даже удалять, потому что от них не зависит никакой внешний код.
+// В новой версии вы можете полностью всё переписать, но пользователю будет легко обновиться, если внешний интерфейс остался такой же.
+
+// --- Сокрытие сложности
+// Люди обожают использовать простые вещи. По крайней мере, снаружи. Что внутри – это другое дело.
+// Программисты не являются исключением.
+
+// --- Всегда удобно, когда детали реализации скрыты, и доступен простой, хорошо документированный внешний интерфейс.
+// Для сокрытия внутреннего интерфейса мы используем защищённые или приватные свойства:
+// Защищённые поля имеют префикс _. Это хорошо известное соглашение, не поддерживаемое на уровне языка. 
+// Программисты должны обращаться к полю, начинающемуся с _, только из его класса и классов, унаследованных от него.
+// Приватные поля имеют префикс #. JavaScript гарантирует, что мы можем получить доступ к таким полям только внутри класса.
+// В настоящее время приватные поля не очень хорошо поддерживаются в браузерах, но можно использовать полифил.
+
+//===
+//======= 1.5 Расширение встроенных классов =======
+// добавим один метод (можно более одного)
+// class PowerArray extends Array {
+//     isEmpty() {
+//         return this.length === 0;
+//     }
+// }
+
+// let arr = new PowerArray(1, 2, 5, 10, 50);
+// alert(arr.isEmpty()); // false
+
+// let filteredArr = arr.filter(item => item >= 10);
+// alert(filteredArr); // 10, 50
+// alert(filteredArr.isEmpty()); // false
+
+// class PowerArray extends Array {
+//     isEmpty() {
+//         return this.length === 0;
+//     }
+
+//     // встроенные методы массива будут использовать этот метод как конструктор
+//     static get [Symbol.species]() {
+//         return Array;
+//     }
+// }
+
+// let arr = new PowerArray(1, 2, 5, 10, 50);
+// alert(arr.isEmpty()); // false
+
+// // filter создаст новый массив, используя arr.constructor[Symbol.species] как конструктор
+// let filteredArr = arr.filter(item => item >= 10);
+
+// // filteredArr не является PowerArray, это Array
+// alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 
 
+//===
+//======= 1.6 Проверка класса: "instanceof" =======
+// class Rabbit { }
+// let rabbit = new Rabbit();
+
+// // это объект класса Rabbit?
+// alert(rabbit instanceof Rabbit); // true
+
+// // вместо класса
+// function Rabbit() { }
+
+// alert(new Rabbit() instanceof Rabbit); // true
+
+// let arr = [1, 2, 3];
+// alert(arr instanceof Array); // true
+// alert(arr instanceof Object); // true
+
+//=== Итого
+// Давайте обобщим, какие методы для проверки типа мы знаем:
+//              работает для	возвращает
+// typeof	      примитивов	строка
+// {}.toString	примитивов, встроенных объектов, объектов с Symbol.toStringTag	строка
+// instanceof	    объектов	true/false
+
+// Как мы можем видеть, технически {}.toString «более продвинут», чем typeof.
+// А оператор instanceof – отличный выбор, когда мы работаем с иерархией классов и хотим делать проверки с учётом наследования.
+
+
+//===
+//======= 1.7 Примеси =======
+// примесь
+// let sayHiMixin = {
+//     sayHi() {
+//         alert(`Привет, ${this.name}`);
+//     },
+//     sayBye() {
+//         alert(`Пока, ${this.name}`);
+//     }
+// };
+
+// // использование:
+// class User {
+//     constructor(name) {
+//         this.name = name;
+//     }
+// }
+
+// // копируем методы
+// Object.assign(User.prototype, sayHiMixin);
+
+// // теперь User может сказать Привет
+// new User("Вася").sayHi(); // Привет, Вася!
+
+// let sayMixin = {
+//     say(phrase) {
+//         alert(phrase);
+//     }
+// };
+
+// let sayHiMixin = {
+//     __proto__: sayMixin, // (или мы можем использовать Object.create для задания прототипа)
+
+//     sayHi() {
+//         // вызываем метод родителя
+//         super.say(`Привет, ${this.name}`); // (*)
+//     },
+//     sayBye() {
+//         super.say(`Пока, ${this.name}`); // (*)
+//     }
+// };
+
+// class User {
+//     constructor(name) {
+//         this.name = name;
+//     }
+// }
+
+// // копируем методы
+// Object.assign(User.prototype, sayHiMixin);
+
+// // теперь User может сказать Привет
+// new User("Вася").sayHi(); // Привет, Вася!
+
+
+// let eventMixin = {
+//     /**
+//      * Подписаться на событие, использование:
+//      * menu.on('select', function(item) { ... }
+//      */
+//     on(eventName, handler) {
+//         if (!this._eventHandlers) this._eventHandlers = {};
+//         if (!this._eventHandlers[eventName]) {
+//             this._eventHandlers[eventName] = [];
+//         }
+//         this._eventHandlers[eventName].push(handler);
+//     },
+
+//     /**
+//      * Отменить подписку, использование:
+//      * menu.off('select', handler)
+//      */
+//     off(eventName, handler) {
+//         let handlers = this._eventHandlers && this._eventHandlers[eventName];
+//         if (!handlers) return;
+//         for (let i = 0; i < handlers.length; i++) {
+//             if (handlers[i] === handler) {
+//                 handlers.splice(i--, 1);
+//             }
+//         }
+//     },
+
+//     /**
+//      * Сгенерировать событие с указанным именем и данными
+//      * this.trigger('select', data1, data2);
+//      */
+//     trigger(eventName, ...args) {
+//         if (!this._eventHandlers || !this._eventHandlers[eventName]) {
+//             return; // обработчиков для этого события нет
+//         }
+
+//         // вызовем обработчики
+//         this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
+//     }
+// };
+
+// Создадим класс
+// class Menu {
+//     choose(value) {
+//         this.trigger("select", value);
+//     }
+// }
+// // Добавим примесь с методами для событий
+// Object.assign(Menu.prototype, eventMixin);
+
+// let menu = new Menu();
+
+// // Добавить обработчик, который будет вызван при событии "select":
+// menu.on("select", value => alert(`Выбранное значение: ${value}`));
+
+// // Генерирует событие => обработчик выше запускается и выводит:
+// menu.choose("123"); // Выбранное значение: 123
+
+//=== Итого
+// Примесь – общий термин в объектно-ориентированном программировании: класс, который содержит в себе методы для других классов.
+// Некоторые другие языки допускают множественное наследование. JavaScript не поддерживает множественное наследование, 
+// но с помощью примесей мы можем реализовать нечто похожее, скопировав методы в прототип.
+// Мы можем использовать примеси для расширения функциональности классов, например, для обработки событий, как мы сделали это выше.
+// С примесями могут возникнуть конфликты, если они перезаписывают существующие методы класса.
+// Стоит помнить об этом и быть внимательнее при выборе имён для методов примеси, чтобы их избежать.
 
 //============================================================================
 //============================================================================
