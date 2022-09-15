@@ -18,23 +18,23 @@
 // === II ===
 На этом изображении показано как нужно организовать наследование между классами.
 Требования:
-Human должен принимать параметры name,аде.
+- Human должен принимать параметры name,аде.
 Все представители этого класса должны иметь метод ,sayHi(), который возвращает строку с приветствием.
-Programmer должен принимать параметр technologies (массив строк) 
-с названиями любых технологий (пример: ['HTML', 'CSS', 'JS']).
-Все представители этого класса долны иметь метод .startCodingO, 
-который возвращает строку вида 'David is coding using HTML, CSS, JS'.
+- Programmer должен принимать параметр technologies (массив строк) с названиями любых технологий 
+(пример: ['HTML', 'CSS', 'JS']).
+Все представители этого класса долны иметь метод .startCodingO, который возвращает строку вида
+'David is coding using HTML, CSS, JS'.
 Имя 'David' и названия технологий должны меняться в зависимости оттого, каким объектом был вызван метод.
-Sportsman должен принимать параметр medals, который характеризует количество медалей у спортсмена.
-FootballPlayer должен принимать параметр team (строка) с названием команды где играет футболист. 
+- Sportsman должен принимать параметр medals, который характеризует количество медалей у спортсмена.
+- FootballPlayer должен принимать параметр team (строка) с названием команды где играет футболист.
 Все представители этого класса должны иметь метод .run(speed), где speed это число характеризующее скорость бега.
 Метод .run(б) должен возвращать строку вида 'John is running б kmph',
 где имя 'John' может меняться в зависимости от объекта вызывающего метод ,run().
-HockeyPlayer должен принимать параметр weight (число) характеризующим массу хоккеиста.
-Все представители этого класса должны иметь метод .pushOpponent(opponentName), 
-который должен возвращать строку вида 'Bill pushed Brandon and used 123kgs', 
+- HockeyPlayer должен принимать параметр weight (число) характеризующим массу хоккеиста.
+Все представители этого класса должны иметь метод .pushOpponent(opponentName),
+который должен возвращать строку вида 'Bill pushed Brandon and used 123kgs',
 имя 'Bill' и количество кг могут меняться в зависимости от объекта запустившего метод.
-Имя 'Brandon' может меняться в зависимости от opponentName 
+Имя 'Brandon' может меняться в зависимости от opponentName
 переданного в момент вызова метода.
 
 
@@ -63,39 +63,4 @@ play вернет сообщение с требованием замены ба
 существовать конструктор Params, который принимает три
 параметра (width, length, height)
 
-// === I solution ===
-// ______________________________________________________________________
-// function Line (x, y, a, b) {
-//     this.point1 = {
-//         x: x,
-//         y: y,
-//     },
-//     this.point2 = {
-//         x: a,
-//         y: b
-//     }
-// }
-// Line.prototype.getLineLenght = function () {
-//     this.lenghtLine = Math.sqrt((this.point1.x-this.point2.x)**2+(this.point1.y-this.point2.y)**2);
-// }
-
-// const line1 = new Line (1, 2, 5, 5);
-// const line2 = new Line (3, 8, 2, 1);
-// const line3 = new Line (0, 4, 3, 6);
-
-// line1.getLineLenght();
-// line2.getLineLenght();
-// line3.getLineLenght();
-
-// function canTriniagle (line1, line2, line3) {
-//     if(line1 < line2 + line3 && line2 < line1 + line3 && line3 < line1 + line2) {
-//         return console.log(`lines can make triniagle`);
-//     } else {
-//         return console.log(`lines can't make triniagle`)
-//     }
-// }
-// console.log(line1);
-// console.log(line2);
-// console.log(line3);
-// canTriniagle (line1.lenghtLine, line2.lenghtLine, line3.lenghtLine);
 
