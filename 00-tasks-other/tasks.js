@@ -169,99 +169,219 @@
 // isConnected == false. Если заряд батареек == 0, то метод
 // play вернет сообщение с требованием замены батареек.
 
+// class Battery {
+//   constructor(type, energy = 100) {
+//     this.type = type;
+//     this.energy = energy;
+//   }
+// }
+
+// class Device {
+//   constructor(batteryType) {
+//     this.batteryType = batteryType;
+//   }
+
+//   insertBattery(batteryOne, batteryTwo) {
+//     if (batteryOne.type === this.batteryType && batteryTwo.type === this.batteryType) {
+//       this.batteryOne = batteryOne;
+//       this.batteryTwo = batteryTwo;
+//       return 'Батарейки вставлены.';
+//     } else {
+//       return 'Батарейки не вставлены.';
+//     };
+//   }
+// }
+
+// class Gamepad extends Device {
+//   constructor(model, ...args) {
+//     super(...args);
+//     this.model = model;
+//     this.isConnected = false;
+//   }
+
+//   connectTo(device) {
+
+//     if (this.batteryOne.energy != 0) {
+//       this.isConnected = true;
+//     } else {
+//       this.isConnected = false;
+//     }
+
+//     if (this.isConnected) {
+//       console.log(device + " connected to TV");
+//     }
+//   }
+
+//   disconnect() {
+//     this.isConnected = false;
+//     console.log('Устройство отключено.');
+//   }
+
+//   play() {
+//     this.batteryOne.energy -= 10;
+//     this.batteryTwo.energy -= 10;
+
+//     if (this.batteryOne.energy === 0 && this.batteryTwo.energy === 0) {
+//       this.isConnected == false;
+//       console.log('замените батарейки');
+//     }
+//   }
+// }
+
+// const battery1 = new Battery('AAA');
+// const battery2 = new Battery('AAA');
+// const battery3 = new Battery('AAA');
+// const battery4 = new Battery('AAA');
+// const battery5 = new Battery('AA');
+
+// console.log(battery1.energy);
+
+// const xboxGamepad = new Gamepad('xbox', 'AAA');
+// console.log(xboxGamepad.insertBattery(battery1, battery2));
+// xboxGamepad.connectTo(xboxGamepad.model);
+// xboxGamepad.disconnect();
+// xboxGamepad.connectTo('PC');
+// xboxGamepad.play();
+// xboxGamepad.play();
+// xboxGamepad.play();
+// xboxGamepad.play();
+// console.log(battery1.energy);
+// xboxGamepad.play();
+// xboxGamepad.play();
+// xboxGamepad.play();
+// console.log(battery1.energy);
+// xboxGamepad.play();
+// xboxGamepad.play();
+// xboxGamepad.play();
+// console.log(xboxGamepad.insertBattery(battery3, battery4));
+// console.log(battery3.energy);
+// xboxGamepad.play();
+// xboxGamepad.play();
+// xboxGamepad.play();
+// console.log(battery4.energy);
+
+//======= Преподователь решение ==========
 class Battery {
-  constructor(type, energy = 100) {
+  #energy = 100;
+
+  constructor(type) {
     this.type = type;
-    this.energy = energy;
+  }
+
+  consumeEnergy(amount) {
+    if (Math.abs(amount) <= this.#energy) {
+      this.#energy -= amount;
+    }
+  }
+
+  get energy() {
+    return this.#energy;
+  }
+
+  recharge() {
+    this.#energy = 100;
   }
 }
 
 class Device {
+  #batteries = [];
+
   constructor(batteryType) {
     this.batteryType = batteryType;
   }
 
-  insertBattery(batteryOne, batteryTwo) {
-    if (batteryOne.type === this.batteryType && batteryTwo.type === this.batteryType) {
-      this.batteryOne = batteryOne;
-      this.batteryTwo = batteryTwo;
-
-      return 'Батарейки вставлены.';
+  insertBatteries(bt1, bt2) {
+    if (bt1?.type !== this.batteryType || bt2?.type !== this.batteryType) {
+      throw new BatteryError(`You passed battery type ${bt1.type} and ${bt2.type} 
+          but device is ${this.batteryType} type`);
+    } else if (this.#batteries.length) {
+      console.log('batteries are already set');
     } else {
-      return 'Батарейки не вставлены.';
-    };
+      this.#batteries = [bt1, bt2];
+    }
+  }
+
+  removeBatteries() {
+    this.#batteries = [];
+  }
+
+  consumeEnergy(percent) {
+    this.#batteries.forEach((bt) => bt.consumeEnergy(percent));
+  }
+
+  areBatteriesCharged() {
+    return this.#batteries.every((bt) => bt.energy);
+  }
+
+  hasBatteries() {
+    return Boolean(this.#batteries.length);
   }
 }
 
+class BatteryError extends Error { }
+
 class Gamepad extends Device {
-  constructor(model, ...args) {
-    super(...args);
+  #isConnected = false;
 
+  constructor(model, batteryType) {
+    super(batteryType);
     this.model = model;
-   
-
-    this.isConnected = false;
-
   }
 
   connectTo(device) {
-
-    if (this.batteryOne.energy != 0) {
-      this.isConnected = true;
+    if (this.hasBatteries() && !this.#isConnected) {
+      console.log(`${this.model} has been connected to ${device}`);
+      this.#isConnected = true;
     } else {
-      this.isConnected = false;
-    }
-
-    if (this.isConnected) {
-
-      console.log(device + " connected to TV");
+      console.log(`This ${this.model} doesn't have batteries or is already connected`);
     }
   }
 
   disconnect() {
-    this.isConnected = false;
-    console.log('Устройство отключено.');
+    this.#isConnected = false;
   }
 
   play() {
-    this.batteryOne.energy -= 10;
-    this.batteryTwo.energy -= 10;
-
-    if (this.batteryOne.energy === 0 && this.batteryTwo.energy === 0) {
-      this.isConnected == false;
-      console.log('замените батарейки');
+    if (this.areBatteriesCharged() && this.hasBatteries()) {
+      this.consumeEnergy(10);
+      console.log(`you are playing`);
+    } else {
+      this.#isConnected = false;
+      console.log(`Please change/insert batteries`);
     }
   }
 }
 
-const battery1 = new Battery('AAA');
-const battery2 = new Battery('AAA');
-const battery3 = new Battery('AAA');
-const battery4 = new Battery('AAA');
-const battery5 = new Battery('AA');
+const bt1 = new Battery('AA');
+const bt2 = new Battery('BB');
+const bt3 = new Battery('AA');
+const xboxGamepad = new Gamepad('Xbox Gamepad', 'AA');
 
-console.log(battery1.energy);
+try {
+  xboxGamepad.insertBatteries(bt1, bt2);
+} catch (err) {
+  if (err instanceof BatteryError) {
+    xboxGamepad.insertBatteries(bt1, bt3);
+  } else {
+    throw err;
+  }
+}
 
-const xboxGamepad = new Gamepad('xbox', 'AAA');
-console.log(xboxGamepad.insertBattery(battery1, battery2));
-xboxGamepad.connectTo(xboxGamepad.model);
-xboxGamepad.disconnect();
-xboxGamepad.connectTo('PC');
+xboxGamepad.connectTo('Playstation');
 xboxGamepad.play();
 xboxGamepad.play();
 xboxGamepad.play();
 xboxGamepad.play();
-console.log(battery1.energy);
 xboxGamepad.play();
 xboxGamepad.play();
 xboxGamepad.play();
-console.log(battery1.energy);
 xboxGamepad.play();
 xboxGamepad.play();
 xboxGamepad.play();
-console.log(xboxGamepad.insertBattery(battery3, battery4));
-console.log(battery3.energy);
 xboxGamepad.play();
 xboxGamepad.play();
 xboxGamepad.play();
-console.log(battery4.energy);
+xboxGamepad.removeBatteries();
+xboxGamepad.play();
+xboxGamepad.play();
+//===========================================
