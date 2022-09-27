@@ -161,12 +161,12 @@
 //     }, 1000);
 // })
 
-const p1 = new Promise((res) =>
-    setTimeout(() => res(1), 500));
-const p2 = new Promise((res) =>
-    setTimeout(() => res(2), 1000));
-const p3 = new Promise((res) =>
-    setTimeout(() => res(3), 700));
+// const p1 = new Promise((res) =>
+//     setTimeout(() => res(1), 500));
+// const p2 = new Promise((res) =>
+//     setTimeout(() => res(2), 1000));
+// const p3 = new Promise((res) =>
+//     setTimeout(() => res(3), 700));
 
 // Promise.all([p1,p2,p3])
 // .then((res) => {
@@ -207,18 +207,18 @@ const p3 = new Promise((res) =>
 
 //     let result = await p1;
 
-    // try {
-    //     result = await p1;
-    // } catch (err) {
-    //     console.log(err);
-    // }
-  
-    // throw new Error(12);
+// try {
+//     result = await p1;
+// } catch (err) {
+//     console.log(err);
+// }
+
+// throw new Error(12);
 
 //     console.log('HI!', result);
 
 //     console.log('FINALLY');
-    
+
 //     return result;
 // };
 
@@ -232,5 +232,60 @@ const p3 = new Promise((res) =>
 //     const obj = await foo();
 // };
 
+// ========================================
+// API - Application Programming Interface
+// fetch эмпламентация AJAX
+
+// Async Javascript - AJAX - XML
+// JSON - javascript - object - notaion
+
+fetch("https://reqres.in/api/users?page=2")
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
+
+// const user = {
+//     name: 'John',
+//     age: 2
+// };
+
+// const JSONedUser = JSON.stringify(user);
+// const UnJSONedUser = JSON.parse(JSONedUser);
+
+// console.log(UnJSONedUser);
+
+// copy object
+
+const user = {
+    name: 'John',
+    age: 2,
+    address: {
+        city: 'Gomel'
+    }
+};
+
+const JSONed = JSON.stringify(user);
+const UnJSONedCopy = JSON.parse(JSONed);
+
+console.log(user);
+UnJSONedCopy.name = "AAAAA"
+console.log(UnJSONedCopy);
+
+fetch("https://reqres.in/api/users", {
+    method: 'POST',
+    body: JSON.stringify({
+        name: 'John',
+        job: 'programmer'
+    })
+})
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
 
 
