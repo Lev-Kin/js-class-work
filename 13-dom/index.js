@@ -3,6 +3,7 @@
 // Oject
 // Model
 //===============================
+// === http://old.code.mu/ === some solution can look outdated.
 
 // https://learn.javascript.ru/json
 // https://learn.javascript.ru/dom-nodes
@@ -114,25 +115,72 @@
 // ok - 2раза BOOM - 1раз;
 // после BOOM кнопки не работают
 
+// === Version 1 ===
+// const btn1 = document.getElementById('btn1');
+// const btn2 = document.getElementById('btn2');
+// const btn3 = document.getElementById('btn3');
 
-const btn1 = document.getElementById('btn1');
-const btn2 = document.getElementById('btn2');
-const btn3 = document.getElementById('btn3');
+// function ok() {
+//     console.log('OK!');
+//     this.style.backgroundColor = 'green';
+//     this.removeEventListener('click', ok);
+// }
 
-const listener = function (event) {
-    if (event) {
-        console.log('OK');
-    } else {
-        console.log('BOOM');
+// function boom() {
+//     console.log('BOOM!');
+//     this.style.backgroundColor = 'red';
+//     btn1.setAttribute('disabled', 'disabled');
+//     btn2.setAttribute('disabled', 'disabled');
+//     btn3.setAttribute('disabled', 'disabled');
+// }
+
+// btn1.addEventListener('click', ok);
+// btn2.addEventListener('click', ok);
+// btn3.addEventListener('click', ok);
+
+// function mine() {
+//     let select = Math.floor(Math.random() * 3) + 1;
+//     if (select === 1) {
+//         btn1.removeEventListener('click', ok);
+//         btn1.addEventListener('click', boom)
+//     }
+//     else if (select === 2) {
+//         btn2.removeEventListener('click', ok);
+//         btn2.addEventListener('click', boom);
+//     }
+//     else {
+//         btn3.removeEventListener('click', ok);
+//         btn3.addEventListener('click', boom);
+//     }
+// }
+// mine();
+
+// === Version 2 ===
+(function mine() {
+    const buttons = [
+        document.getElementById('btn1'),
+        document.getElementById('btn2'),
+        document.getElementById('btn3')
+    ];
+
+    function ok() {
+        console.debug('OK!');
+        this.style.backgroundColor = 'green';
+        this.removeEventListener('click', ok);
     }
-};
 
+    function boom() {
+        console.debug('BOOM!');
+        this.style.backgroundColor = 'red';
+        buttons.forEach((button) => button.setAttribute('disabled', 'disabled'));
+    }
 
-btn1.addEventListener('click', listener );
-btn1.removeEventListener('click', listener, false);
+    buttons.forEach((button) => button.addEventListener('click', ok));
 
-// нужно считать количесво вызовав и хронить бум
+    const explodeButton = buttons[Math.floor(Math.random() * 3)];
+    explodeButton.removeEventListener('click', ok);
+    explodeButton.addEventListener('click', boom)
 
-
+})();
 
 
