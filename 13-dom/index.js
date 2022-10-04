@@ -156,31 +156,33 @@
 // mine();
 
 // === Version 2 ===
-(function mine() {
-    const buttons = [
-        document.getElementById('btn1'),
-        document.getElementById('btn2'),
-        document.getElementById('btn3')
-    ];
+// (function mine() {
+//     const buttons = [
+//         document.getElementById('btn1'),
+//         document.getElementById('btn2'),
+//         document.getElementById('btn3')
+//     ];
 
-    function ok() {
-        console.debug('OK!');
-        this.style.backgroundColor = 'green';
-        this.removeEventListener('click', ok);
-    }
+//     function ok() {
+//         console.log('OK!');
+//         this.style.backgroundColor = 'green';
+//         this.removeEventListener('click', ok);
+//     }
 
-    function boom() {
-        console.debug('BOOM!');
-        this.style.backgroundColor = 'red';
-        buttons.forEach((button) => button.setAttribute('disabled', 'disabled'));
-    }
+//     function boom() {
+//         console.log('BOOM!');
+//         this.style.backgroundColor = 'red';
+//         buttons.forEach((button) => button.setAttribute('disabled', 'disabled'));
+//     }
 
-    buttons.forEach((button) => button.addEventListener('click', ok));
+//     buttons.forEach((button) => button.addEventListener('click', ok));
 
-    const explodeButton = buttons[Math.floor(Math.random() * 3)];
-    explodeButton.removeEventListener('click', ok);
-    explodeButton.addEventListener('click', boom)
+//     const explodeButton = buttons[Math.floor(Math.random() * 3)];
+//     explodeButton.removeEventListener('click', ok);
+//     explodeButton.addEventListener('click', boom)
 
-})();
+// })();
+
+// https://www.codewars.com/ - задачки по js
 
 

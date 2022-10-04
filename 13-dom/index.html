@@ -14,6 +14,10 @@
       #list > li {
         border: 1px solid purple;
       }
+
+      .active {
+        border: 5px dotted purple;
+      }
     </style>
   </head>
 
@@ -25,7 +29,7 @@
     <button id="btn1">=== 1 ===</button>
     <button id="btn2">=== 2 ===</button>
     <button id="btn3">=== 3 ===</button>
-    <br><br>
+    <br /><br />
     <input type="text" id="input" />
     <div>
       <p>
@@ -35,9 +39,11 @@
       </p>
     </div>
 
-    <div>
+    <div id="wrapper">
       <ul id="list">
-        <li>item1</li>
+        <li id="fitem">
+          <p id="pitem" data-smth="blabla">item1</p>
+        </li>
         <li>item2</li>
         <li class="item">item3</li>
         <li>item4</li>
@@ -56,6 +62,7 @@
       </ol>
     </div>
 
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
+    <script src="index2.js"></script>
   </body>
 </html>
