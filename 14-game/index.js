@@ -1,38 +1,51 @@
 // *1. спрятать рандомно клад
-// 2. получить координаты клика
-// 3. выяснить расстояние от координат клика до сокровища
-// 4. градация тепло-холодно
-// 5. подсказки
+// *2. получить координаты клика
+// *3. выяснить расстояние от координат клика до сокровища
+// *4. градация тепло-холодно
+// *5. подсказки
 // *6. показать сокровище
 
 const mapWrapper = document.getElementById('mapWrapper');
+const hintElement = document.getElementById('hint');
 
-mapWrapper.addEventListener('click', ({ layerX, layerY }) => {
-    const clickCoord = {
-        x: layerX,
-        y: layerY
+const gameHandler = ({offsetX, offsetY, currentTarget}) => {
+    const clickCoords = {
+        x: offsetX,
+        y: offsetY
     };
 
-    //console.log(treasure.getLengthTo(clickCoord));
-});
+    const distanceToTreasure = treasure.getLengthTo(clickCoords);
+    const hint = treasure.getHintByLength(distanceToTreasure);
+
+    if (hint === TreasureWithHints.hints[0]) {
+        treasure.show();
+        currentTarget.removeEventListener('click', gameHandler);
+    }
+
+    hintElement.innerText = hint;
+};
+
+mapWrapper.addEventListener('click', gameHandler);
+
 
 class Treasure {
-    static IMAGE_URL = './imgs/chest.png'
+    static IMAGE_URL = './imgs/chest.png';
 
-    constructor(parent) {
+    constructor (parent) {
         this.coords = {
             x: this.#calculateCoord(parent.clientWidth),
             y: this.#calculateCoord(parent.clientHeight)
         };
+
         this.parent = parent;
     }
 
-    #calculateCoord(limit) {
+    #calculateCoord (limit) {
         const gap = limit * 0.1;
-        return Math.round(Math.random() * (limit - 2 * gap)) + gap;
+        return  Math.round(Math.random() * (limit - 2 * gap)) + gap;
     }
 
-    show() {
+    show () {
         const img = document.createElement('img');
         img.src = Treasure.IMAGE_URL;
         img.style.width = '15%';
@@ -43,7 +56,7 @@ class Treasure {
         img.style.opacity = '0';
         img.style.transition = 'all 0.5s ease';
 
-        setTimeout(() => {
+        setTimeout(() =>{ 
             img.style.opacity = 1;
             img.style.transform = 'translate(-50%, -50%) scale(1)';
         }, 500);
@@ -52,15 +65,41 @@ class Treasure {
         this.parent.append(img);
     }
 
-    getLengthTo({ x, y }) {
-        const katet1Lehgth = this.coords.x - x;
-        const katet2Lehgth = this.coords.y - y;
+    getLengthTo ({x, y}) {
+        const katet1Length = Math.round(this.coords.x - x);
+        const katet2Length = Math.round(this.coords.y - y);
 
-        return Math.sqrt(katet1Lehgth ** 2 + katet2Lehgth ** 2);
+        return Math.round(Math.sqrt(katet1Length**2 + katet2Length**2));
     }
 }
 
-const treasure = new Treasure(mapWrapper);
-treasure.show();
-console.log(treasure);
+class TreasureWithHints extends Treasure {
+    static hints = [
+        'GJ!',
+        'HOT!',
+        'WARM!',
+        'COLD!',
+        'WINTER IS COMING!'
+    ];
+
+    constructor (parent) {
+        super(parent);
+    }
+
+    getHintByLength (length) {
+        if (length < 30) {
+            return TreasureWithHints.hints[0];
+        } else if (length < 60) {
+            return TreasureWithHints.hints[1];
+        } else if (length < 90) {
+            return TreasureWithHints.hints[2];
+        } else if (length < 120) {
+            return TreasureWithHints.hints[3];
+        } else {
+            return TreasureWithHints.hints[4];
+        }
+    }
+}
+
+const treasure = new TreasureWithHints(mapWrapper);
 
