@@ -1,11 +1,24 @@
+
 const person = {
-    name: "John",
+    name: 'John',
     age: 23
 };
 
 const cat = {
-    nick: 'daf',
+    nick: 'Murzik',
     age: 24,
 };
 
-export {person, cat};
+function blabla () {
+    console.log('bla');
+}
+
+export default class Person {
+    constructor () {
+        this.name = 'SMTH';
+    }
+}
+
+
+
+export {person, cat, blabla};

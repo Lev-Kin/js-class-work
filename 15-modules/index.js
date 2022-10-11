@@ -1,14 +1,9 @@
-// import { person as human, cat } from './person.js'
-import * as animals from './person.js'
-const person = {
-    name: 'Valerchik',
-    age: 12
-};
+import SHTUKA, {person, cat as dog} from './person.js';
+import {a as b} from './test.js';
 
-// console.log(human);
-// console.log(person);
-// console.log(cat);
 
-console.log(animals);
+
+console.log('index.js', new SHTUKA());
+
 
 
