@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+    text-align: center;
+}
+
+#wrapper {
+    width: 80%;
+    margin: 20px auto; 
+    text-align: center;
+}
+
+#wrapper > img {
+    max-width: 400px;
+}
+
+#word {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    letter-spacing: 10px;
+}
+
+#word > span {
+    font-size: 50px;
+}
+
+#answer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    letter-spacing: 20px;
+}
+
+#letter {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid coral;
+    transition: all 0.2s ease-in-out;
+    font-size: 50px;
+    width: 50px;
+    text-align: center;
+}
+
+#btn {
+    border: none;
+    outline: none;
+    color: #fff;
+    background: coral;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
+    transition: all 0.2s ease-in-out;
+    padding: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#btn:active {
+    box-shadow: none;
+}
+
+#btn:hover {
+    background: salmon;
+}
+
+#letter:hover {
+    border-bottom-width: 2px;
+}
+
+#letter:focus {
+    border-bottom-width: 2px;    
+}
+
+#win {
+    width: 300px;
+    height: 150px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 15px;
+    background-color: grey;
+    font-size: 40px;
+    text-shadow: 5px 5px 3px black;
+    color: green;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+#lose {
+    width: 300px;
+    height: 150px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 15px;
+    background-color: rgb(78, 70, 70);
+    font-size: 40px;
+    color: rgb(211, 34, 34);
+    text-shadow: 5px 5px 3px black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+#reset {
+    outline: none;
+    display: block;
+    width: 100px;
+    font-size: 40px;
+    margin: 5px auto;
+    align-items: center;
+    grid-template: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 5px 5px 2px black;
+}
+
+#reset:hover {
+    cursor: pointer;
+    
+}
+
+#reset:active {
+    background-color: gray;
+}
+
