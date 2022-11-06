@@ -1,8 +1,9 @@
 "use strict"
-import partOne from  './part-one.js';
+import partOne from './part-one.js';
+import partTwo from './part-two.js';
 
-partOne();
-
+// partOne();
+partTwo();
 
 
 
