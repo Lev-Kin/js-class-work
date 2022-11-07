@@ -75,17 +75,118 @@ const partTwo = () => {
     // итераторов: только для ключей (keys()), 
     // только для значений (values()) и для записей (entries()).
 
+
     // !=== Замыкания ===!
+    {
+        function greeting(msg) {
+            return function who(name) {
+                console.log(`${msg}, ${name}!`);
+            };
+        };
+        var hello = greeting("Hello");
+        var howdy = greeting("Howdy");
+        hello("Kyle");      // Hello, Kyle!
+        hello("Sarah");     // Hello, Sarah!
+        howdy("Grant");     // Howdy, Grant!
+
+        function counter(step = 1) {
+            var count = 0;
+            return function increaseCount() {
+                count = count + step;
+                return count;
+            };
+        }
+        var incBy1 = counter(1);
+        var incBy3 = counter(3);
+        console.log(incBy1()); // 1
+        console.log(incBy1()); // 2
+        console.log(incBy3()); // 3
+        console.log(incBy3()); // 6
+        console.log(incBy3()); // 9
+
+        // Внешняя область видимости не обязана быть функцией 
+        // — обычно она ей является, но не всегда.
+        // Важно лишь то, чтобы во внешней области видимости была
+        // как минимум одна переменная, к которой происходит обращение
+        // из внутренней функции.
+        var buttons = new Map();
+        buttons.set(btn1, buttons.size);
+        buttons.set(btn2, buttons.size);
+        for (let [btn, idx] of buttons.entries()) {
+            btn.addEventListener("click", function onClick() {
+                console.log(`Clicked on button (${idx})!`);
+            });
+        }
+
+        // Замыкания чаще всего встречаются при работе с асинхронным кодом
+        // — например, обратными вызовами.
+        function getSomeData(url) {
+            return (url, function onResponse(resp) { // ajax <--- return
+                console.log(
+                    `Response (from ${url}): ${resp}`
+                );
+            });
+        }
+        getSomeData("https://some.url/wherever");
+        // Response (from https://some.url/wherever): ...
+    } globalThis;
 
 
+    // !=== this
+    function classroom(teacher) {
+        return function study() {
+            console.log(
+                `${teacher} says to study ${this.topic}`
+            );
+        };
+    }
+    var assignment = classroom("Kyle");
+    // assignment(); // ошибка
 
+    // Копия ссылки на функцию assignment назначается как свойство объекта
+    // homework, после чего она вызывается выражением homework.assignment().
+    // Это означает, что this для этого вызова функции будет указывать на объект
+    // homework. Следовательно, this.topic преобразуется в "JS".
+    var homework = {
+        topic: "JS",
+        assignment: assignment
+    };
+    homework.assignment();          // Kyle says to study JS
 
+    // Vетод call(..), который получает объект (otherHomework в данном случае),
+    // используемый для назначения ссылки this для вызова функции.
+    // Свойство this.topic преобразуется в "Math".
+    var otherHomework = {
+        topic: "Math"
+    };
+    assignment.call(otherHomework); // Kyle says to study Math
 
+    // !=== Прототипы
+    var homework = {
+        topic: "JS"
+    };
 
+    var otherHomework = Object.create(homework);
+    console.log(homework.topic);        // "JS"
+    console.log(otherHomework.topic);   // "JS"
 
+    otherHomework.topic = "Math";
+    console.log(otherHomework.topic);   // "Math"
+    console.log(homework.topic);        // "JS" -- не "Math"
 
+    var homework = {
+        study() {
+            console.log(`Please study ${this.topic}`);
+        }
+    };
+    // Делегирование поведения объектов
+    var jsHomework = Object.create(homework);
+    jsHomework.topic = "JS";
+    jsHomework.study();     // Please study JS
 
-
+    var mathHomework = Object.create(homework);
+    mathHomework.topic = "Math";
+    mathHomework.study();   // Please study Math
 }
 
 export default partTwo;
