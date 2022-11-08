@@ -79,11 +79,81 @@ const partAaa = () => {
     };
 
     // !=== Условное сравнение с преобразованием типа
-    
+    var x = 1;
+    if (x) {
+        // будет выполнено!
+    }
+    while (x) {
+        // будет выполнено один раз!
+        x = false;
+    }
 
+    // Эти условные выражения можно интерпретировать так:
+    var x = 1;
+    if (x == true) {
+        // будет выполнено!
+    }
 
+    while (x == true) {
+        // будет выполнено один раз!
+        x = false;
+    }
 
+    // В этом конкретном случае — когда значение x равно 1 — эта модель работает,
+    // но в более общем случае она теряет точность.
+    var x = "hello";
+    if (x) {
+        // будет выполнено!
+    }
+    if (x == true) {
+        // не будет выполнено :(
+    }
 
+    // Нехорошо.Что же в действительности происходит в команде if?
+    // Более точная мысленная модель выглядит так:
+    var x = "hello";
+    if (Boolean(x) == true) {
+        // будет выполнено
+    }
+
+    // что то же самое, что:
+    if (Boolean(x) === true) {
+        // будет выполнено
+    }
+
+    // !=== Прототипические классы
+    var Classroom1 = {
+        welcome() {
+            console.log("Welcome, students!");
+        }
+    };
+    var mathClass = Object.create(Classroom1);
+    mathClass.welcome(); // Welcome, students!
+
+    // Паттерн «Прототипический класс» отнес бы поведение делегирования к наследованию 
+    // и мог бы определить его (с таким же поведением) следующим образом:
+    function Classroom2() {
+        // ..
+    }
+    Classroom2.prototype.welcome = function hello() {
+        console.log("Welcome, students!");
+    };
+    var mathClass = new Classroom2();
+    mathClass.welcome(); // Welcome, students!
+
+    // В настоящее время паттерн «прототипический класс»
+    // настоятельно не рекомендуется использовать. 
+    // Ему на смену пришел механизм классов ES6:
+    class Classroom3 {
+        constructor() {
+            // ..
+        }
+        welcome() {
+            console.log("Welcome, students!");
+        }
+    }
+    var mathClass = new Classroom3();
+    mathClass.welcome(); // Welcome, students!
 }
 
 export default partAaa;
